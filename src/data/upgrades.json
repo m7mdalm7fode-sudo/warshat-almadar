@@ -1,0 +1,18 @@
+{
+  "items": [
+    { "id": "tools", "type": "tool", "name": "مفكّ كهربائي", "desc": "+15% وقت في كل إصلاح (لكل مستوى)", "cost": [150, 320, 520], "effect": { "timeMult": 0.15 } },
+    { "id": "magnifier", "type": "tool", "name": "عدسة فاحصة", "desc": "تكشف رقماً من كل قفل سري", "cost": [220], "effect": { "lockHint": 1 } },
+    { "id": "coffee", "type": "tool", "name": "دلّة قهوة للضيوف", "desc": "الزبائن يقبلون التفاوض أكثر", "cost": [180], "effect": { "negotiate": 0.2 } },
+    { "id": "neon", "type": "tool", "name": "لوحة نيون فاخرة", "desc": "السمعة ترتفع أسرع بـ 25%", "cost": [260], "effect": { "repMult": 0.25 } },
+    { "id": "shelter", "type": "stage", "toStage": 2, "name": "ملجأ متين", "desc": "انقل الكشك إلى ملجأ واختر تصميمه (+10% أجر)", "cost": [600], "effect": { "payMult": 0.1 } },
+    { "id": "floor_tools", "type": "floor", "toStage": 3, "requiresStage": 2, "name": "دور الأدوات", "label": "الأدوات", "desc": "أدوات أسرع: +25% وقت إصلاح", "cost": [800], "effect": { "timeMult": 0.25 } },
+    { "id": "floor_rich", "type": "floor", "toStage": 3, "requiresStage": 2, "name": "دور الاستقبال الفاخر", "label": "الاستقبال", "desc": "زبائن أغنى: +40% أجر", "cost": [1000], "effect": { "payMult": 0.4 } },
+    { "id": "floor_storage", "type": "floor", "toStage": 3, "requiresStage": 2, "name": "دور المخزن", "label": "المخزن", "desc": "+60 دخل يومي، ويستبعد قطعاً خاطئة من الدرج", "cost": [1100], "effect": { "passive": 60, "swapHint": 2 } },
+    { "id": "engine", "type": "engine", "toStage": 4, "requiresFloors": 3, "name": "المحرّك المداري", "desc": "ركّب المحرك وأطلق الورشة سفينةً بين النجوم!", "cost": [2000], "effect": {} }
+  ],
+  "designs": [
+    { "id": "dome", "name": "القبّة الزجاجية", "desc": "ضوء النجوم يدخل من كل جهة" },
+    { "id": "container", "name": "حاويات الشحن", "desc": "عملية وصلبة مثل الميناء" },
+    { "id": "rock", "name": "الكهف الصخري", "desc": "منحوت في صخرة نيزك قديم" }
+  ]
+}
