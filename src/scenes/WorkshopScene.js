@@ -584,7 +584,9 @@ export default class WorkshopScene extends Phaser.Scene {
 
   officerLook() {
     const def = CUSTOMER_DATA.story.find((c) => c.id === 'officer_reward');
-    return makeLook(def.look, hashStr('officer'));
+    const look = makeLook(def.look, hashStr('officer'));
+    look.voiceKey = 'S';
+    return look;
   }
 
   policeLights(on) {

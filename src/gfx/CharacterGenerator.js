@@ -704,7 +704,7 @@ export class Character extends Phaser.GameObjects.Container {
   }
 
   get voiceProfile() {
-    return { species: this.look.species, pitch: this.look.pitch };
+    return { species: this.look.species, pitch: this.look.pitch, voiceKey: this.look.voiceKey };
   }
 
   react(mood) {

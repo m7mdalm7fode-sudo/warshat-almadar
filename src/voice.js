@@ -1,6 +1,14 @@
 // أصوات الشخصيات: صوت عربي حقيقي (ذكوري فقط) إن توفّر في الجهاز، وإلا "همهمة" مولّدة لكل شخصية
 import { Sfx } from './audio.js';
 import { Game } from './state.js';
+import VOICEMAP from './data/voicemap.json';
+
+// فهرس احتياطي: نفس الجملة بأي صوت مسجّل (للردود العامة)
+const BY_TEXT = {};
+Object.entries(VOICEMAP).forEach(([k, f]) => {
+  const t = k.slice(k.indexOf('|') + 1);
+  if (!BY_TEXT[t]) BY_TEXT[t] = f;
+});
 
 // أسماء أصوات ذكورية معروفة في أنظمة التشغيل (iOS/macOS/Windows/Android)
 const MALE = /(maged|majed|naayf|naif|nayef|hamed|hamid|shakir|fahed|fahad|tarik|tarek|omar|hamdan|ahmed|ahmad|mohammed|mohamed|zayd|khalid|male)/i;
@@ -30,6 +38,23 @@ class VoiceEngine {
   }
 
   get mode() { return Game.settings.voice || 'auto'; }
+
+  /** يشغّل تسجيل ElevenLabs إن وجد، ويرجع مدته التقريبية */
+  playRecorded(text, profile) {
+    if (!Game.settings.sound) return null;
+    const file = VOICEMAP[`${profile.voiceKey || 'F'}|${text}`] || BY_TEXT[text];
+    if (!file) return null;
+    try {
+      const a = new Audio(`voices/${file}`);
+      a.preservesPitch = false; a.mozPreservesPitch = false; a.webkitPreservesPitch = false;
+      a.playbackRate = profile.species === 'robot' ? 1.12 : profile.species === 'alien' ? 0.9 : 1;
+      a.volume = 0.95;
+      const p = a.play();
+      if (p && p.catch) p.catch(() => {});
+      this.current = a;
+      return Math.max(900, text.length * 75);
+    } catch (e) { return null; }
+  }
   get hasReal() { return !!this.voice; }
 
   /** يرجع المدة التقريبية للكلام بالملّي ثانية */
@@ -37,6 +62,10 @@ class VoiceEngine {
     this.stop();
     const mode = this.mode;
     if (mode === 'off' || !text) return 0;
+    if (mode !== 'babble') {
+      const d = this.playRecorded(text, profile);
+      if (d) return d;
+    }
     const clean = String(text)
       .replace(/\([^)]*\)/g, ' ')          // لا تقرأ الوصف اللي بين القوسين
       .replace(/[◈★♪✓✗«»"]/g, ' ')
@@ -123,6 +152,7 @@ class VoiceEngine {
   }
 
   stop() {
+    if (this.current) { try { this.current.pause(); } catch (e) { /* ignore */ } this.current = null; }
     try { if ('speechSynthesis' in window) window.speechSynthesis.cancel(); } catch (e) { /* ignore */ }
   }
 }

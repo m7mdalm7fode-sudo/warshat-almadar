@@ -77,6 +77,7 @@ export function resolveVisit(entry, st, mods) {
     const tpl = probs[Math.floor(r() * probs.length)];
     const rich = mods.payMult >= 1.4 && r() < 0.5;
     const look = makeLook(rich ? { accessory: 'chain' } : {}, entry.seed);
+    look.voiceKey = 'F';
     const names = data.generic.names[look.species];
     const name = names[Math.floor(r() * names.length)];
     const greets = data.generic.greet[look.species];
@@ -98,6 +99,7 @@ export function resolveVisit(entry, st, mods) {
   const def = byId[entry.id];
   if (!def) return null;
   const look = makeLook(def.look || {}, hashStr(def.lookSeed || def.id));
+  look.voiceKey = def.voice || 'F';
   const memKey = def.memKey || def.id;
   const mem = st.memory[memKey];
 
@@ -126,8 +128,7 @@ export function resolveVisit(entry, st, mods) {
 }
 
 export function reactionLine(cat, v) {
-  const line = pickRand(data.reactions[cat] || ['...']);
-  return v && v.look && v.look.species === 'robot' ? `بيب! ${line}` : line;
+  return pickRand(data.reactions[cat] || ['...']);
 }
 
 export const CUSTOMER_DATA = data;

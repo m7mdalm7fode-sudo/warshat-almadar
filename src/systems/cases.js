@@ -38,6 +38,7 @@ export function planSuspect(st) {
 export function resolveSuspect(entry, st, priceOf) {
   const r = rng(entry.seed);
   const look = makeLook(pickR(r, T.thieves.looks), entry.seed);
+  look.voiceKey = 'A';
   let name, itemKind, itemName, engraving, claim;
   if (entry.thief) {
     const o = OWNERS[entry.owner];
@@ -64,6 +65,7 @@ export function resolveOwner(entry, st) {
   const o = OWNERS[entry.id];
   if (!o) return null;
   const look = makeLook(o.look, entry.seed || 7);
+  look.voiceKey = o.voice || 'F';
   if (entry.mode === 'lost') {
     return {
       id: null, memKey: `owner_${o.id}`, kind: 'owner', name: o.name, look, itemKind: null,
