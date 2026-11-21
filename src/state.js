@@ -1,4 +1,5 @@
 import upgradesData from './data/upgrades.json';
+import thievesData from './data/thieves.json';
 
 const SAVE_KEY = 'warshat-almadar-save-v1';
 const SET_KEY = 'warshat-almadar-settings-v1';
@@ -17,7 +18,11 @@ function freshState() {
     memory: {},
     seen: {},
     schedule: [],
-    stats: { served: 0, earned: 0, perfect: 0, refused: 0, failed: 0 },
+    stats: { served: 0, earned: 0, perfect: 0, refused: 0, failed: 0, arrests: 0 },
+    cases: {},
+    board: [],
+    trophies: [],
+    news: [],
     introSeen: false,
     finished: false,
   };
@@ -83,6 +88,11 @@ export function getMods(st) {
     const u = upgradeById[id];
     if (!u || !lvl) continue;
     for (const [k, v] of Object.entries(u.effect || {})) m[k] = (m[k] || 0) + v * lvl;
+  }
+  for (const id of st.trophies || []) {
+    const t = thievesData.trophies[id];
+    if (!t) continue;
+    for (const [k, v] of Object.entries(t.effect || {})) m[k] = (m[k] || 0) + v;
   }
   m.dayTime = Math.round(240 * (1 + (m.timeMult - 1) * 0.5));
   return m;

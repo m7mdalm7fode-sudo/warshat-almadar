@@ -1,6 +1,7 @@
 // بناء طابور الزبائن اليومي وتحويل بيانات JSON إلى زيارة جاهزة للعرض
 import data from '../data/customers.json';
 import { makeLook, hashStr, rng } from '../gfx/CharacterGenerator.js';
+import { planSuspect, resolveSuspect, resolveOwner } from './cases.js';
 
 const byId = {};
 data.story.forEach((c) => { byId[c.id] = { ...c, kind: 'story' }; });
@@ -28,6 +29,7 @@ export function buildDayQueue(st) {
   const due = st.schedule.filter((s) => s.day <= st.day);
   st.schedule = st.schedule.filter((s) => s.day > st.day);
   due.forEach((s) => {
+    if (s.kind === 'owner') { special.push({ type: 'owner', id: s.id, mode: s.mode, seed: s.seed }); return; }
     const d = byId[s.id];
     if (d && flagsOk(d, st)) special.push({ type: 'story', id: s.id });
   });
@@ -47,6 +49,9 @@ export function buildDayQueue(st) {
   });
   if (rec.length) special.push({ type: 'recurring', id: pickRand(rec).id });
 
+  const suspect = planSuspect(st);
+  if (suspect) special.push(suspect);
+
   count = Math.max(count, Math.min(8, special.length + 2));
   const q = [...special];
   while (q.length < count) q.push({ type: 'generic', seed: Math.floor(Math.random() * 1e9) });
@@ -54,7 +59,7 @@ export function buildDayQueue(st) {
   return q;
 }
 
-function priceOf(base, st, mods) {
+export function priceOf(base, st, mods) {
   const dayMult = 1 + Math.min(0.5, (st.day - 1) * 0.045);
   const repMult = 0.7 + st.rep * 0.12;
   return Math.max(20, Math.round((base * dayMult * repMult * mods.payMult) / 5) * 5);
@@ -80,6 +85,9 @@ export function resolveVisit(entry, st, mods) {
       price: priceOf(base * (rich ? 1.2 : 1), st, mods),
     };
   }
+
+  if (entry.type === 'suspect') return resolveSuspect(entry, st, (b) => priceOf(b, st, mods));
+  if (entry.type === 'owner') return resolveOwner(entry, st);
 
   const def = byId[entry.id];
   if (!def) return null;

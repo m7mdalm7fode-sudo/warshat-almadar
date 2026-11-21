@@ -75,7 +75,12 @@ export class DialogBox {
     this.text.setText(this.full);
     this.arrow.setVisible(true);
     if (this.auto) {
-      this.s.time.delayedCall(this.auto, () => { if (this.active && !this.typing) this.next(); });
+      const tryNext = () => {
+        if (!this.active || this.typing) return;
+        if (this.s.modalOpen) { this.s.time.delayedCall(300, tryNext); return; }
+        this.next();
+      };
+      this.s.time.delayedCall(this.auto, tryNext);
     }
   }
 

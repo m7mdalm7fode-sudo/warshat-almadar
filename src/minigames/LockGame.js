@@ -19,13 +19,13 @@ export default class LockGame extends BaseMinigame {
     this.guess = [1, 2, 3, 4];
     this.locked = [false, false, false, false];
     this.tries = 0;
-    if (this.mods.lockHint) {
-      const i = Phaser.Math.Between(0, 3);
-      this.locked[i] = true;
-      this.guess[i] = this.code[i];
-      // باقي الخانات تبدأ بأرقام مختلفة عن الرقم المكشوف
-      const rest = Array.from({ length: this.maxDigit }, (_, k) => k + 1).filter((v) => v !== this.code[i]);
-      for (let k = 0, r = 0; k < 4; k++) if (k !== i) this.guess[k] = rest[r++];
+    const reveal = Math.min(2, this.mods.lockHint || 0);
+    if (reveal) {
+      const idxs = Phaser.Utils.Array.Shuffle([0, 1, 2, 3]).slice(0, reveal);
+      idxs.forEach((i) => { this.locked[i] = true; this.guess[i] = this.code[i]; });
+      // باقي الخانات تبدأ بأرقام مختلفة عن الأرقام المكشوفة
+      const rest = Array.from({ length: this.maxDigit }, (_, k) => k + 1).filter((v) => !idxs.some((i) => this.code[i] === v));
+      for (let k = 0, r = 0; k < 4; k++) if (!this.locked[k]) this.guess[k] = rest[r++];
     }
 
     // شاشة الجهاز

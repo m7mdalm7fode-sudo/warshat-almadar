@@ -92,7 +92,7 @@ export default class EndingScene extends Phaser.Scene {
 
   credits() {
     const st = Game.state;
-    const good = GOOD.filter((f) => st.flags[f]).length;
+    const good = GOOD.filter((f) => st.flags[f]).length + Math.min(3, st.stats.arrests || 0);
     const bad = BAD.filter((f) => st.flags[f]).length;
     const verdict = good - bad >= 1 ? 'فنّي شريف تحكي عنه المحطة بأكملها' : bad - good >= 2 ? 'اسمك محفوظ في ملفات الأمن... للأبد' : 'فنّي شاطر... وله أسراره';
     const c = this.add.container(0, 0).setDepth(30).setAlpha(0);

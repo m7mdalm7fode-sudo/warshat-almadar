@@ -14,6 +14,7 @@ export default class MenuScene extends Phaser.Scene {
   create() {
     setupCamera(this);
     this.modalOpen = false;
+    this.showcase = null;
     drawCity(this, 0, 0, W, 620);
     const g = this.add.graphics().setDepth(5);
     g.fillGradientStyle(0x1c1f2e, 0x1c1f2e, 0x07040f, 0x07040f, 1);
@@ -69,7 +70,7 @@ export default class MenuScene extends Phaser.Scene {
 
   spawnShowcase() {
     const old = this.showcase;
-    if (old) old.leave(-200);
+    if (old && old.scene) old.leave(-200);
     const look = makeLook({}, Math.floor(Math.random() * 1e9));
     const ch = new Character(this, W + 200, 590, look, 1.05);
     ch.setDepth(4);
