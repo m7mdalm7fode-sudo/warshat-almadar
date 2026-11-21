@@ -60,6 +60,7 @@ export function makeLook(spec = {}, seed = 1) {
     bisht: spec.bisht ? hx(spec.bisht) : (outfit === 'thobe' && r() < 0.25 ? pick(r, [0x3b2a1a, 0x1a1a1a, 0x5a4026]) : null),
     accessory: spec.accessory || (species === 'robot' ? pick(r, ['none', 'antenna', 'shoulderLamp', 'pack']) : pick(r, accOpts)),
     sw: 56 + Math.floor(r() * 12),
+    pitch: spec.pitch || (0.72 + r() * 0.34),
   };
 }
 
@@ -67,12 +68,36 @@ export function makeLook(spec = {}, seed = 1) {
 function drawBack(g, L) {
   if (L.accessory === 'pack') {
     g.fillStyle(shade(L.secondary, -0.35));
-    g.fillRoundedRect(-L.sw - 8, -126, L.sw * 2 + 16, 130, 18);
+    g.fillRoundedRect(-L.sw - 10, -128, L.sw * 2 + 20, 132, 22);
+    g.fillStyle(shade(L.secondary, -0.15));
+    g.fillRoundedRect(-L.sw - 14, -96, 14, 40, 6);
   }
   if (L.cover === 'hood' || L.outfit === 'cloak') {
-    g.fillStyle(shade(L.primary, -0.3));
-    g.fillPoints([{ x: -L.sw - 10, y: -100 }, { x: L.sw + 10, y: -100 }, { x: L.sw + 22, y: 50 }, { x: -L.sw - 22, y: 50 }], true);
+    g.fillStyle(shade(L.primary, -0.32));
+    g.beginPath();
+    g.moveTo(-L.sw - 4, -112);
+    g.quadTo(0, -128, L.sw + 4, -112);
+    g.quadTo(L.sw + 26, -20, L.sw + 30, 60);
+    g.lineTo(-L.sw - 30, 60);
+    g.quadTo(-L.sw - 26, -20, -L.sw - 4, -112);
+    g.fillPath();
   }
+}
+
+/** مسار جذع طبيعي: انحدار الكتفين، أكتاف دائرية، خصر متناسق */
+function torsoPath(g, sw) {
+  g.beginPath();
+  g.moveTo(-15, -136);
+  g.quadTo(-sw * 0.55, -134, -sw + 4, -120);
+  g.quadTo(-sw - 8, -114, -sw - 6, -94);
+  g.lineTo(-sw * 0.93, -40);
+  g.quadTo(-sw * 0.88, 10, -sw * 0.86, 62);
+  g.lineTo(sw * 0.86, 62);
+  g.quadTo(sw * 0.88, 10, sw * 0.93, -40);
+  g.lineTo(sw + 6, -94);
+  g.quadTo(sw + 8, -114, sw - 4, -120);
+  g.quadTo(sw * 0.55, -134, 15, -136);
+  g.closePath();
 }
 
 function drawTorso(g, L) {
@@ -81,13 +106,30 @@ function drawTorso(g, L) {
   // الرقبة
   const neck = L.species === 'robot' ? shade(L.metal, -0.35) : L.species === 'alien' ? L.skin : shade(L.secondary, -0.25);
   g.fillStyle(neck);
-  g.fillRoundedRect(-14, -152, 28, 40, 6);
-  // الجذع
+  g.fillRoundedRect(-15, -156, 30, 40, 8);
+  g.fillStyle(shade(neck, -0.35), 0.6);
+  g.fillRect(-15, -128, 30, 6);
+  // الجذع بانحناءات طبيعية
   g.fillStyle(base);
-  g.fillPoints([{ x: -sw, y: -108 }, { x: sw, y: -108 }, { x: sw * 0.86, y: 50 }, { x: -sw * 0.86, y: 50 }], true);
-  g.fillRoundedRect(-sw + 2, -124, sw * 2 - 4, 34, 16);
-  g.fillStyle(shade(base, -0.18), 1);
-  g.fillPoints([{ x: sw * 0.55, y: -100 }, { x: sw, y: -104 }, { x: sw * 0.86, y: 50 }, { x: sw * 0.5, y: 50 }], true);
+  torsoPath(g, sw);
+  g.fillPath();
+  // تظليل ناعم: ظل يمين، ضوء يسار، طيّات
+  const ctx = g.ctx;
+  ctx.save();
+  torsoPath(g, sw);
+  const ops = g.ops; g.ops = null;
+  ctx.beginPath(); ops.forEach((f) => f(ctx)); ctx.clip();
+  g.fillStyle(shade(base, -0.28), 0.55);
+  g.beginPath(); g.moveTo(sw * 0.35, -140); g.quadTo(sw * 0.7, -40, sw * 0.45, 70); g.lineTo(sw + 20, 70); g.lineTo(sw + 20, -140); g.closePath(); g.fillPath();
+  g.fillStyle(0xffffff, 0.08);
+  g.beginPath(); g.moveTo(-sw - 10, -130); g.quadTo(-sw * 0.55, -60, -sw * 0.62, 70); g.lineTo(-sw - 10, 70); g.closePath(); g.fillPath();
+  g.lineStyle(2, shade(base, -0.3), 0.35);
+  g.beginPath(); g.moveTo(-sw * 0.5, -60); g.quadTo(-sw * 0.42, -10, -sw * 0.48, 40); g.strokePath();
+  g.beginPath(); g.moveTo(sw * 0.2, -70); g.quadTo(sw * 0.3, -20, sw * 0.22, 40); g.strokePath();
+  g.lineStyle(3, shade(base, -0.35), 0.5);
+  g.beginPath(); g.moveTo(-sw * 0.55, -128); g.quadTo(-sw * 0.75, -110, -sw * 0.78, -86); g.strokePath();
+  g.beginPath(); g.moveTo(sw * 0.55, -128); g.quadTo(sw * 0.75, -110, sw * 0.78, -86); g.strokePath();
+  ctx.restore();
 
   switch (L.outfit) {
     case 'thobe': {
@@ -225,45 +267,92 @@ function sleeveColor(L) {
   if (L.outfit === 'chassis') return shade(L.metal, -0.1);
   if (L.outfit === 'thobe' && L.bisht) return L.bisht;
   if (L.outfit === 'armor') return shade(L.primary, -0.1);
+  if (L.outfit === 'cloak') return shade(L.primary, -0.12);
   return shade(L.primary, -0.06);
 }
 
-function drawArm(g, L, side) {
-  const sw = L.sw;
-  const sx = side * (sw - 12), sy = -104;
-  const ex = side * (sw + 10), ey = -54;
-  const hxp = side * (sw * 0.6), hy = -14;
-  const col = sleeveColor(L);
-  g.lineStyle(26, col, 1);
-  g.lineBetween(sx, sy, ex, ey);
-  g.lineBetween(ex, ey, hxp, hy);
+/** طرف مخروطي بين نقطتين (عضد أو ساعد) */
+function limb(g, x1, y1, r1, x2, y2, r2, col) {
+  const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy) || 1;
+  const px = -dy / len, py = dx / len;
   g.fillStyle(col);
-  g.fillCircle(sx, sy, 13);
-  g.fillCircle(ex, ey, 13);
+  g.fillPoints([
+    { x: x1 + px * r1, y: y1 + py * r1 }, { x: x2 + px * r2, y: y2 + py * r2 },
+    { x: x2 - px * r2, y: y2 - py * r2 }, { x: x1 - px * r1, y: y1 - py * r1 },
+  ]);
+  g.fillCircle(x1, y1, r1);
+  g.fillCircle(x2, y2, r2);
+  // خط ضوء على طول الطرف
+  g.lineStyle(2.5, 0xffffff, 0.12);
+  g.lineBetween(x1 - px * r1 * 0.55, y1 - py * r1 * 0.55, x2 - px * r2 * 0.55, y2 - py * r2 * 0.55);
+  g.lineStyle(3, shade(col, -0.4), 0.45);
+  g.lineBetween(x1 + px * r1 * 0.75, y1 + py * r1 * 0.75, x2 + px * r2 * 0.75, y2 + py * r2 * 0.75);
+}
+
+export function armJoints(L, side) {
+  const sw = L.sw;
+  return {
+    S: { x: side * (sw - 6), y: -106 },
+    E: { x: side * (sw + 14), y: -56 },
+    W: { x: side * (sw * 0.62), y: -20 },
+  };
+}
+
+function drawHand(g, L, x, y, side) {
+  if (L.species === 'robot') {
+    const m = shade(L.metal, -0.2);
+    g.fillStyle(m); g.fillRoundedRect(x - 13, y - 8, 26, 16, 5);
+    g.fillStyle(shade(L.metal, 0.2));
+    [-8, 0, 8].forEach((dx) => { g.fillRoundedRect(x + dx - 3, y + 6, 6, 13, 2); g.fillCircle(x + dx, y + 7, 3); });
+    g.fillStyle(L.accent); g.fillCircle(x, y - 1, 2.5);
+    return;
+  }
+  if (L.species === 'alien') {
+    g.fillStyle(L.skin); g.fillEllipse(x, y, 26, 18);
+    g.fillStyle(shade(L.skin, -0.12));
+    [-9, 0, 9].forEach((dx, i) => { g.fillRoundedRect(x + dx - 3.5, y + 4, 7, 18 + (i === 1 ? 4 : 0), 3.5); });
+    g.fillStyle(shade(L.skin, 0.3), 0.6);
+    [-9, 0, 9].forEach((dx) => g.fillCircle(x + dx, y + 10, 1.6));
+    return;
+  }
+  // قفاز من الأمام مستند على الطاولة
+  const gl = L.glove;
+  g.fillStyle(shade(gl, -0.2)); g.fillRoundedRect(x - 14, y - 12, 28, 9, 4);
+  g.fillStyle(gl); g.fillRoundedRect(x - 15, y - 6, 30, 20, 9);
+  g.fillStyle(shade(gl, 0.1));
+  [-10.5, -3.5, 3.5, 10.5].forEach((dx, i) => g.fillRoundedRect(x + dx - 3.4, y + 8, 6.8, 11 - (i === 0 || i === 3 ? 2 : 0), 3.4));
+  g.fillStyle(shade(gl, -0.05));
+  g.fillEllipse(x - side * 15, y + 3, 9, 14);
+  g.lineStyle(1.5, shade(gl, 0.35), 0.6);
+  g.lineBetween(x - 9, y - 1, x + 9, y - 1);
+}
+
+function drawArm(g, L, side) {
+  const { S, E, W } = armJoints(L, side);
+  const col = sleeveColor(L);
+  const thick = L.outfit === 'armor' ? 1.15 : L.outfit === 'cloak' ? 1.1 : 1;
+  limb(g, S.x, S.y, 15 * thick, E.x, E.y, 12 * thick, col);
+  limb(g, E.x, E.y, 12 * thick, W.x, W.y, 10.5 * thick, shade(col, 0.03));
+  // كوع وكتف
+  g.fillStyle(shade(col, -0.15), 0.5); g.fillCircle(E.x, E.y, 7 * thick);
+  if (L.outfit === 'armor') {
+    g.fillStyle(shade(L.metal, 0.05)); g.fillEllipse(S.x, S.y - 4, 44, 32);
+    g.lineStyle(2, shade(L.metal, -0.4)); g.strokeEllipse(S.x, S.y - 4, 44, 32);
+    g.fillStyle(shade(L.metal, -0.05)); g.fillRoundedRect(W.x - 12, W.y - 26, 24, 18, 5);
+  }
   if (L.outfit === 'jacket' || L.outfit === 'coverall') {
     g.lineStyle(4, L.accent, 0.8);
-    g.lineBetween(ex - side * 2, ey - 18, ex + side * 2, ey - 6);
+    const mx = (S.x + E.x) / 2, my = (S.y + E.y) / 2;
+    g.lineBetween(mx - 9, my - 3, mx + 9, my + 3);
   }
-  // اليد
-  if (L.species === 'robot') {
-    g.fillStyle(shade(L.metal, -0.25));
-    g.fillCircle(hxp, hy, 13);
-    g.fillStyle(shade(L.metal, 0.15));
-    g.fillRoundedRect(hxp - side * 4 - 4, hy + 4, 8, 14, 3);
-    g.fillRoundedRect(hxp + side * 8 - 4, hy + 2, 8, 14, 3);
-  } else if (L.species === 'alien') {
-    g.fillStyle(L.skin);
-    g.fillCircle(hxp, hy, 12);
-    g.fillStyle(shade(L.skin, -0.15));
-    for (let i = -1; i <= 1; i++) g.fillEllipse(hxp + side * 4 + i * 8, hy + 12, 6, 16);
+  if (L.outfit === 'thobe' || L.outfit === 'cloak') {
+    // كمّ واسع
+    g.fillStyle(shade(col, -0.05));
+    g.fillPoints([{ x: W.x - 16, y: W.y - 22 }, { x: W.x + 16, y: W.y - 22 }, { x: W.x + 13, y: W.y - 4 }, { x: W.x - 13, y: W.y - 4 }]);
   } else {
-    g.fillStyle(shade(col, -0.3));
-    g.fillRoundedRect(hxp - 14, hy - 12, 28, 8, 3);
-    g.fillStyle(L.glove);
-    g.fillCircle(hxp, hy, 14);
-    g.fillStyle(shade(L.glove, 0.12));
-    for (let i = -1; i <= 2; i++) g.fillEllipse(hxp + i * 7 * side - 3 * side, hy + 11, 7, 12);
+    g.fillStyle(shade(col, -0.3)); g.fillRoundedRect(W.x - 12, W.y - 12, 24, 8, 3);
   }
+  drawHand(g, L, W.x, W.y + 4, side);
 }
 
 // ---------------- رسم الرأس (بدون ملامح) ----------------
@@ -453,10 +542,13 @@ export class Character extends Phaser.GameObjects.Container {
       drawBack(g, look); drawTorso(g, look); drawArm(g, look, -1);
     }, lightO);
     const pa = paint(scene, this.texKeys[1], 260, 240, 130, 170, (g) => drawArm(g, look, 1), lightO);
+    const sj = armJoints(look, 1).S;
     // ظل خفيف على الطاولة
     const shadow = scene.add.image(0, 6, 'soft').setTint(0x000000).setAlpha(0.45).setScale(2.6, 0.35);
     this.bodyC.add([shadow, painted(scene, 0, 0, pb)]);
-    this.armR = painted(scene, 0, 0, pa);
+    this.armR = painted(scene, sj.x, sj.y, pa);
+    this.armR.setOrigin((pa.ox + sj.x) / pa.w, (pa.oy + sj.y) / pa.h);
+    this.armBase = { x: sj.x, y: sj.y };
     this.bodyC.add(this.armR);
 
     this.headWrap = scene.add.container(0, -176);
@@ -518,6 +610,8 @@ export class Character extends Phaser.GameObjects.Container {
 
   preDestroy() {
     if (this.bubbleTimer) this.bubbleTimer.remove();
+    if (this.waveEv) this.waveEv.remove();
+    if (this.talkEnd) this.talkEnd.remove();
     if (this.scene) this.scene.tweens.killTweensOf([this, this.inner, this.headC, this.headWrap, this.bodyC, this.armR, this.bubble, this.glow].filter(Boolean));
     super.preDestroy && super.preDestroy();
     const tm = this.scene ? this.scene.textures : null;
@@ -571,9 +665,46 @@ export class Character extends Phaser.GameObjects.Container {
   }
   knock() {
     this.scene.tweens.add({
-      targets: this.armR, y: -22, duration: 110, yoyo: true, repeat: 2, ease: 'Quad.easeOut',
+      targets: this.armR, rotation: -0.22, duration: 110, yoyo: true, repeat: 2, ease: 'Quad.easeOut',
       onYoyo: () => { Sfx.knock(); this.scene.cameras.main.shake(60, 0.002); },
     });
+  }
+
+  /** حركة الكلام: رأس يهتز مع المقاطع، إيماءة باليد، موجة صوت على شاشة الروبوت */
+  talk(ms = 1500) {
+    if (!this.scene) return;
+    this.stopTalk(true);
+    const sc = this.scene;
+    const reps = Math.max(1, Math.round(ms / 260));
+    this.talkTw = sc.tweens.add({ targets: this.headWrap, angle: { from: -1.5, to: 1.5 }, duration: 130, yoyo: true, repeat: reps, ease: 'Sine.easeInOut' });
+    this.talkTw2 = sc.tweens.add({ targets: this.headC, y: -3, duration: 120, yoyo: true, repeat: reps, ease: 'Sine.easeInOut' });
+    if (Math.random() < 0.65) {
+      const ang = -(0.25 + Math.random() * 0.35);
+      this.gestTw = sc.tweens.add({ targets: this.armR, rotation: ang, duration: 260, yoyo: true, hold: Math.min(1400, ms * 0.5), ease: 'Back.easeOut' });
+    }
+    if (this.screenText) {
+      const waves = ['ılıIlı', 'IlıılI', 'ıIlIıl', 'lıIıIl'];
+      let i = 0;
+      this.waveEv = sc.time.addEvent({ delay: 90, loop: true, callback: () => { if (this.screenText) this.screenText.setText(waves[i++ % waves.length]); } });
+    }
+    if (this.glow) {
+      this.glowTw = sc.tweens.add({ targets: this.glow, alpha: { from: 1, to: 0.4 }, duration: 110, yoyo: true, repeat: reps });
+    }
+    this.talkEnd = sc.time.delayedCall(ms, () => this.stopTalk());
+  }
+
+  stopTalk(quick = false) {
+    [this.talkTw, this.talkTw2, this.glowTw].forEach((t) => t && t.stop());
+    if (this.waveEv) { this.waveEv.remove(); this.waveEv = null; if (this.screenText) this.screenText.setText('…'); }
+    if (this.talkEnd) { this.talkEnd.remove(); this.talkEnd = null; }
+    if (!this.scene) return;
+    this.headWrap.angle = 0;
+    this.headC.y = 0;
+    if (this.gestTw && !quick) { this.gestTw.stop(); this.scene.tweens.add({ targets: this.armR, rotation: 0, duration: 200 }); }
+  }
+
+  get voiceProfile() {
+    return { species: this.look.species, pitch: this.look.pitch };
   }
 
   react(mood) {

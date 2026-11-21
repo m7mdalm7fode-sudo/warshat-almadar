@@ -1,12 +1,14 @@
 import Phaser from 'phaser';
 import { W, H, T, COL, HEX, setupCamera, fmt } from '../ui/theme.js';
 import { Game, getMods, difficulty, clampRep } from '../state.js';
+import { Music } from '../music.js';
 import { Sfx, vibrate } from '../audio.js';
 import { buildDayQueue, resolveVisit, reactionLine, CUSTOMER_DATA } from '../systems/customers.js';
 import { Character, makeLook, hashStr } from '../gfx/CharacterGenerator.js';
 import { boardReports, stallPrompts, THIEF_DATA, TROPHIES } from '../systems/cases.js';
 import { drawTrophies, newsTicker, reportsBoard, trophyIcon } from '../gfx/Trophies.js';
-import { painted } from '../gfx/Painter.js';
+import { painted, paint } from '../gfx/Painter.js';
+import { currentEvent, makeContracts, trackContracts, contractLine, skillBonus, addXp, TYPE_NAMES } from '../systems/progress.js';
 import { drawItem } from '../gfx/ItemArt.js';
 import { drawCity } from '../gfx/City.js';
 import { drawInterior, drawCounter, COUNTER_Y } from '../gfx/Interior.js';
@@ -37,6 +39,7 @@ export default class WorkshopScene extends Phaser.Scene {
     drawInterior(this, this.st);
     drawCounter(this, this.st);
     this.hands = new PlayerHands(this);
+    Music.play('work');
     addVignette(this, 0.32, 0.9);
     this.dialog = new DialogBox(this, 600);
     this.topBar = new TopBar(this, { onMenu: () => this.openMenu() });
@@ -56,6 +59,18 @@ export default class WorkshopScene extends Phaser.Scene {
     newsTicker(this, this.st);
     this.board = reportsBoard(this, () => this.openBoard());
     this.board.setCount(boardReports(this.st).length);
+
+    // الحدث اليومي والعقود والسلاسل
+    this.event = currentEvent(this.st);
+    if (this.event && this.event.day) this.dayTime = Math.round(this.dayTime * this.event.day);
+    if (this.event) {
+      this.add.image(270, 300, 'glowTex').setTint(this.event.color).setAlpha(0.22).setScale(5).setBlendMode('ADD').setDepth(5);
+      this.pushNews(`حدث اليوم في المحطة: ${this.event.name}`);
+    }
+    makeContracts(this.st, this.queue);
+    this.combo = 0;
+    this.comboT = T(this, 525, 76, '', 14, '#ffd34a', { weight: 900, ox: 1, stroke: '#07040f', strokeW: 4 }).setDepth(101);
+    this.clipboard = this.makeClipboard();
     this.refreshBar();
 
     this.cameras.main.fadeIn(400);
@@ -63,7 +78,14 @@ export default class WorkshopScene extends Phaser.Scene {
     else this.time.delayedCall(500, () => this.startDayBanner());
   }
 
+  speakerFor(name) {
+    if (this.officer && name === 'الرقيب صخر') return this.officer;
+    if (this.v && name === this.v.name) return this.char;
+    return null;
+  }
+
   refreshBar() {
+    if (this.comboT) this.comboT.setText(this.combo >= 2 ? `سلسلة ×${this.combo}` : '');
     this.topBar.update(this.st, this.dayTime, Math.max(0, this.total - this.queue.length - 1), this.total);
   }
 
@@ -76,8 +98,67 @@ export default class WorkshopScene extends Phaser.Scene {
   }
 
   startDayBanner() {
-    banner(this, `اليوم ${this.st.day} — ${this.total} زبائن`, COL.cyan, 1300);
-    this.time.delayedCall(1500, () => this.nextCustomer());
+    const ev = this.event;
+    const body = (ev ? `حدث اليوم: ${ev.name}\n${ev.desc}\n\n` : '')
+      + `عندك ${this.total} زبائن اليوم.\n\nعقود اليوم:\n` + this.st.contracts.map((c) => `• ${c.text} (${c.reward} كريدت)`).join('\n');
+    modal(this, {
+      title: `صباح اليوم ${this.st.day}`,
+      body,
+      buttons: [{ label: 'يلّا نشتغل', color: COL.green, onClick: () => this.time.delayedCall(300, () => this.nextCustomer()) }],
+    });
+  }
+
+  makeClipboard() {
+    const c = this.add.container(45, 488).setDepth(14);
+    const p = paint(this, 'clipTex', 70, 86, 35, 43, (g) => {
+      g.fillStyle(0x8a6d3b); g.fillRoundedRect(-26, -34, 52, 70, 6);
+      g.fillStyle(0xf2efe6); g.fillRect(-20, -26, 40, 56);
+      g.fillStyle(0x9aa5b1); g.fillRoundedRect(-12, -38, 24, 10, 3);
+      g.lineStyle(1.5, 0x555555, 0.7);
+      for (let y = -16; y < 26; y += 8) g.lineBetween(-14, y, 14, y);
+      g.fillStyle(0x3dff8a); g.fillRect(-14, -20, 5, 5); g.fillRect(-14, -12, 5, 5);
+    }, { keep: true, res: 2, outline: 1 });
+    const img = painted(this, 0, 0, p);
+    const t = T(this, 0, 44, 'العقود', 11, '#bff5d0', { weight: 900, align: 'center', stroke: '#07040f', strokeW: 3 });
+    c.add([img, t]);
+    c.setSize(70, 96).setInteractive({ useHandCursor: true });
+    c.on('pointerup', () => this.openContracts());
+    return c;
+  }
+
+  openContracts() {
+    if (this.modalOpen) return;
+    const ev = this.event;
+    modal(this, {
+      title: 'عقود اليوم',
+      body: (ev ? `حدث اليوم: ${ev.name}\n${ev.desc}\n\n` : '') + this.st.contracts.map((c) => contractLine(c)).join('\n\n'),
+      buttons: [{ label: 'تمام', color: COL.cyan }],
+    });
+  }
+
+  contractsEvent(ev) {
+    const done = trackContracts(this.st, ev);
+    done.forEach((c, i) => {
+      this.time.delayedCall(i * 900, () => {
+        this.st.money += c.reward;
+        this.log.bonus += c.reward;
+        this.log.events.push(`عقد مكتمل: +${c.reward}`);
+        banner(this, `عقد مكتمل! +${c.reward} كريدت`, COL.gold, 1400);
+        Sfx.buy();
+        this.tweens.add({ targets: this.clipboard, scale: 1.3, duration: 160, yoyo: true, repeat: 1 });
+        this.refreshBar();
+      });
+    });
+  }
+
+  applyPrice(v) {
+    if (!v || !v.minigame || !v.price) return;
+    const ev = this.event;
+    let m = skillBonus(this.st, v.minigame).pay;
+    if (ev && ev.pay && ev.pay[v.minigame]) m *= ev.pay[v.minigame];
+    if (ev && ev.payAll) m *= ev.payAll;
+    v.price = Math.round((v.price * m) / 5) * 5;
+    v.hot = !!(ev && ev.pay && ev.pay[v.minigame]);
   }
 
   openMenu() {
@@ -88,7 +169,8 @@ export default class WorkshopScene extends Phaser.Scene {
       body: 'تقدّم اليوم الحالي لا يُحفظ إلا بنهايته.',
       buttons: [
         { label: 'استئناف', color: COL.green },
-        { label: `الصوت: ${s.sound ? 'يعمل' : 'مغلق'}`, color: COL.cyan, onClick: () => { s.sound = !s.sound; Game.saveSettings(); if (!s.sound) Sfx.stopAmbient(); else Sfx.startAmbient(); this.time.delayedCall(10, () => this.openMenu()); } },
+        { label: `المؤثرات: ${s.sound ? 'تعمل' : 'مغلقة'}`, color: COL.cyan, onClick: () => { s.sound = !s.sound; Game.saveSettings(); this.time.delayedCall(10, () => this.openMenu()); } },
+        { label: `الموسيقى: ${s.music !== false ? 'تعمل' : 'مغلقة'}`, color: COL.gold, onClick: () => { s.music = s.music === false; Game.saveSettings(); Music.refresh(); this.time.delayedCall(10, () => this.openMenu()); } },
         { label: `الاهتزاز: ${s.vibration ? 'يعمل' : 'مغلق'}`, color: COL.purple, onClick: () => { s.vibration = !s.vibration; Game.saveSettings(); this.time.delayedCall(10, () => this.openMenu()); } },
         { label: 'القائمة الرئيسية', color: COL.red, onClick: () => { Game.load(); this.scene.start('Menu'); } },
       ],
@@ -113,6 +195,7 @@ export default class WorkshopScene extends Phaser.Scene {
     if (!v) { this.nextCustomer(); return; }
     if (v.id && v.kind === 'story') this.st.seen[v.id] = true;
     this.board.pulse(v.kind === 'suspect');
+    this.applyPrice(v);
     this.v = v;
     this.negotiated = false;
     this.refreshBar();
@@ -192,6 +275,7 @@ export default class WorkshopScene extends Phaser.Scene {
     this.char.react('no');
     this.log.refused += 1;
     this.st.stats.refused += 1;
+    this.contractsEvent({ type: 'refuse' });
     this.changeRep(-0.03);
     this.remember('refused');
     if (this.v.kind === 'suspect' && this.v.thief) delete this.st.cases[this.v.ownerId];
@@ -209,7 +293,8 @@ export default class WorkshopScene extends Phaser.Scene {
     this.scene.launch('Minigame', {
       type,
       difficulty: difficulty(this.st),
-      mods: this.mods,
+      mods: { ...this.mods, timeMult: this.mods.timeMult * skillBonus(this.st, type).time * ((this.event && this.event.time) || 1) },
+      skill: skillBonus(this.st, type).lvl,
       itemKind: this.v.itemKind,
       itemName: this.v.itemName,
       onDone: (res) => {
@@ -227,12 +312,24 @@ export default class WorkshopScene extends Phaser.Scene {
     let pay = 0, dRep, cat, mood;
     if (res.success) {
       pay = Math.round(v.price * (0.45 + 0.55 * res.score));
+      if (res.score >= 0.85) {
+        this.combo += 1;
+        if (this.combo >= 2) {
+          pay = Math.round(pay * Math.min(1.3, 1 + 0.08 * (this.combo - 1)));
+          this.time.delayedCall(300, () => banner(this, `سلسلة إتقان ×${this.combo}!`, COL.gold, 1100));
+        }
+        this.contractsEvent({ type: 'combo', n: this.combo });
+      } else this.combo = 0;
+      const up = addXp(this.st, v.minigame, res.score >= 0.85 ? 2 : 1);
+      if (up) this.time.delayedCall(1400, () => banner(this, `مهارة «${TYPE_NAMES[v.minigame]}» صارت مستوى ${up}!`, COL.green, 1500));
+      this.contractsEvent({ type: 'repair', success: true, minigame: v.minigame, score: res.score });
       if (res.score >= 0.85) { dRep = 0.12; cat = 'great'; mood = 'great'; this.log.perfect += 1; this.st.stats.perfect += 1; }
       else if (res.score >= 0.6) { dRep = 0.05; cat = 'ok'; mood = 'happy'; }
       else { dRep = -0.08; cat = 'bad'; mood = 'sad'; }
       this.remember(res.score >= 0.6 ? 'good' : 'bad');
     } else {
       dRep = -0.3; cat = 'fail'; mood = 'angry';
+      this.combo = 0;
       this.log.failed += 1;
       this.st.stats.failed += 1;
       this.remember('bad');
@@ -316,6 +413,7 @@ export default class WorkshopScene extends Phaser.Scene {
   }
 
   earn(amount, special = false) {
+    this.contractsEvent({ type: 'earn', amount });
     this.st.money += amount;
     this.st.stats.earned += amount;
     this.log.earned += amount;
@@ -410,6 +508,7 @@ export default class WorkshopScene extends Phaser.Scene {
     this.drawStall();
     if (this.item) this.tweens.add({ targets: this.item, alpha: 0.3, duration: 300 });
     if (this.itemLabel) this.itemLabel.setVisible(false);
+    Music.play('tension');
     this.stallQ = stallPrompts(3);
     this.stallI = 0;
     this.dialog.show('أنت', ['(تكتب رسالة للشرطة من تحت الطاولة...)', 'لازم أشغله بالكلام لين يوصلون.'], () => this.nextStall(), { tagColor: COL.pink });
@@ -549,6 +648,7 @@ export default class WorkshopScene extends Phaser.Scene {
     this.time.delayedCall(150, () => Sfx.unlock());
     banner(this, 'تم القبض على اللص!', COL.green, 1500);
     this.st.stats.arrests = (this.st.stats.arrests || 0) + 1;
+    this.contractsEvent({ type: 'arrest' });
     this.log.arrests += 1;
     this.earn(100, true);
     this.changeRep(0.25);
@@ -589,6 +689,7 @@ export default class WorkshopScene extends Phaser.Scene {
     if (this.itemLabel) { this.itemLabel.destroy(); this.itemLabel = null; }
     if (this.item) { const it = this.item; this.item = null; this.tweens.add({ targets: it, alpha: 0, duration: 300, onComplete: () => it.destroy() }); }
     this.dialog.hide();
+    Music.play('work');
     this.time.delayedCall(1000, () => { this.policeLights(false); this.nextCustomer(); });
   }
 
@@ -624,6 +725,9 @@ export default class WorkshopScene extends Phaser.Scene {
 
   endDay() {
     const st = this.st;
+    trackContracts(st, { type: 'dayEnd' }).forEach((c) => { st.money += c.reward; this.log.bonus += c.reward; this.log.events.push(`عقد مكتمل: +${c.reward}`); });
+    const doneN = (st.contracts || []).filter((c) => c.done).length;
+    this.log.contracts = `${doneN}/${(st.contracts || []).length}`;
     const passive = this.mods.passive || 0;
     st.money += passive;
     const log = { ...this.log, passive, repEnd: st.rep, day: st.day };

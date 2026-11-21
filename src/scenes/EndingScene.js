@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { W, H, T, COL, HEX, setupCamera, fmt, arDigits } from '../ui/theme.js';
 import { Game } from '../state.js';
+import { Music } from '../music.js';
 import { Sfx, vibrate } from '../audio.js';
 import { drawCity, starField } from '../gfx/City.js';
 import { drawTower } from '../gfx/TowerView.js';
@@ -14,6 +15,7 @@ export default class EndingScene extends Phaser.Scene {
 
   create() {
     setupCamera(this);
+    Music.play('ending');
     if (!Game.state && !Game.load()) { this.scene.start('Menu'); return; }
     const st = Game.state;
     st.finished = true;

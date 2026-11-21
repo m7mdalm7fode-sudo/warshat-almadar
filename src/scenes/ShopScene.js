@@ -1,18 +1,21 @@
 import Phaser from 'phaser';
 import { W, H, T, COL, HEX, setupCamera, fmt } from '../ui/theme.js';
 import { Game, UPGRADES, DESIGNS } from '../state.js';
+import { Music } from '../music.js';
 import { Sfx, vibrate } from '../audio.js';
 import { starField } from '../gfx/City.js';
 import { drawTower } from '../gfx/TowerView.js';
 import { makeButton } from '../ui/Button.js';
 import { addVignette } from '../gfx/Painter.js';
 import { modal, floatText } from '../ui/Popup.js';
+import { TYPES, TYPE_NAMES, skillLevel, nextLevelXp } from '../systems/progress.js';
 
 export default class ShopScene extends Phaser.Scene {
   constructor() { super('Shop'); }
 
   create() {
     setupCamera(this);
+    Music.play('shop');
     if (!Game.state && !Game.load()) { this.scene.start('Menu'); return; }
     this.modalOpen = false;
     starField(this, 90);
@@ -41,7 +44,22 @@ export default class ShopScene extends Phaser.Scene {
     if (!items.length) L.add(T(this, W / 2, 500, 'اشتريت كل شيء!', 20, '#8a94b8', { align: 'center' }));
 
     L.add(makeButton(this, 330, 912, `ابدأ اليوم ${st.day}`, { w: 300, h: 62, color: COL.green, size: 22, onClick: () => this.startDay() }));
+    L.add(makeButton(this, 76, 82, 'المهارات', { w: 112, h: 40, color: COL.green, size: 15, onClick: () => this.showSkills() }));
     L.add(makeButton(this, 92, 912, 'القائمة', { w: 130, h: 62, color: COL.purple, size: 18, onClick: () => { Game.save(); this.scene.start('Menu'); } }));
+  }
+
+  showSkills() {
+    const m = this.st.mastery || {};
+    const lines = TYPES.map((t) => {
+      const xp = m[t] || 0, lvl = skillLevel(xp), nx = nextLevelXp(xp);
+      const bar = '▰'.repeat(lvl) + '▱'.repeat(5 - lvl);
+      return `${TYPE_NAMES[t]}: مستوى ${lvl} ${bar}\n   +${(lvl - 1) * 6}% وقت · +${(lvl - 1) * 5}% أجر${nx ? ` · الخبرة ${xp}/${nx}` : ' · أعلى مستوى!'}`;
+    });
+    modal(this, {
+      title: 'مهارات الفنّي',
+      body: `كل إصلاح ناجح يعطيك خبرة في نوعه (والممتاز ضعفها).\n\n${lines.join('\n')}`,
+      buttons: [{ label: 'تمام', color: COL.cyan }],
+    });
   }
 
   available() {

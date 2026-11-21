@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { W, H, T, COL, HEX, setupCamera, fmt } from '../ui/theme.js';
 import { Game } from '../state.js';
+import { Music } from '../music.js';
 import { Sfx } from '../audio.js';
 import { starField } from '../gfx/City.js';
 import { drawTower } from '../gfx/TowerView.js';
@@ -12,6 +13,7 @@ export default class SummaryScene extends Phaser.Scene {
 
   create(data) {
     setupCamera(this);
+    Music.play('shop');
     if (!Game.state && !Game.load()) { this.scene.start('Menu'); return; }
     const st = Game.state;
     const log = data.log;
@@ -30,8 +32,8 @@ export default class SummaryScene extends Phaser.Scene {
       ['المرفوضون', `${log.refused}`, '#eaf6ff'],
       ['إصلاحات ممتازة', `${log.perfect}`, '#ffd34a'],
       ['إصلاحات فاشلة', `${log.failed}`, log.failed ? '#ff4d5e' : '#eaf6ff'],
-      ['الدخل', `◈ ${fmt(log.earned)}`, '#ffd34a'],
-      ['دخل المخزن', `◈ ${fmt(log.passive)}`, '#ffd34a'],
+      ['الدخل (مع المكافآت)', `◈ ${fmt(log.earned + log.bonus + log.passive)}`, '#ffd34a'],
+      ['العقود المكتملة', `${log.contracts || '0/0'}`, '#3dff8a'],
       ['غرامات ورشاوى', `◈ ${fmt(log.fines)}`, log.fines ? '#ff4d5e' : '#eaf6ff'],
       ['السمعة', `${log.repStart.toFixed(1)} ← ${log.repEnd.toFixed(1)} ${repD >= 0 ? '▲' : '▼'}`, repD >= 0 ? '#3dff8a' : '#ff4d5e'],
     ];

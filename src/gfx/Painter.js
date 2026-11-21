@@ -86,13 +86,20 @@ export class CanvasG {
   lineBetween(x1, y1, x2, y2) { return this._stroke((c) => { c.moveTo(x1, y1); c.lineTo(x2, y2); }); }
 
   // ---- مسارات ----
-  beginPath() { this.ops = []; return this; }
-  arc(x, y, r, s, e, acw = false) { (this.ops || (this.ops = [])).push((c) => c.arc(x, y, r, s, e, acw)); this._arcY = [y - r, y + r]; return this; }
-  moveTo(x, y) { (this.ops || (this.ops = [])).push((c) => c.moveTo(x, y)); return this; }
-  lineTo(x, y) { (this.ops || (this.ops = [])).push((c) => c.lineTo(x, y)); return this; }
-  closePath() { (this.ops || (this.ops = [])).push((c) => c.closePath()); return this; }
+  beginPath() { this.ops = []; this._ys = []; this._arcY = null; return this; }
+  _op(f, ...ys) { (this.ops || (this.ops = [])).push(f); (this._ys || (this._ys = [])).push(...ys); return this; }
+  arc(x, y, r, s, e, acw = false) { this._arcY = [y - r, y + r]; return this._op((c) => c.arc(x, y, r, s, e, acw), y - r, y + r); }
+  moveTo(x, y) { return this._op((c) => c.moveTo(x, y), y); }
+  lineTo(x, y) { return this._op((c) => c.lineTo(x, y), y); }
+  quadTo(cx, cy, x, y) { return this._op((c) => c.quadraticCurveTo(cx, cy, x, y), cy, y); }
+  bezTo(c1x, c1y, c2x, c2y, x, y) { return this._op((c) => c.bezierCurveTo(c1x, c1y, c2x, c2y, x, y), c1y, c2y, y); }
+  closePath() { return this._op((c) => c.closePath()); }
   strokePath() { const ops = this.ops || []; this.ops = null; return this._stroke((c) => ops.forEach((f) => f(c))); }
-  fillPath() { const ops = this.ops || []; this.ops = null; const [a, b] = this._arcY || [0, 1]; return this._fill((c) => ops.forEach((f) => f(c)), a, b); }
+  fillPath() {
+    const ops = this.ops || []; this.ops = null;
+    const ys = this._ys && this._ys.length ? this._ys : (this._arcY || [0, 1]);
+    return this._fill((c) => ops.forEach((f) => f(c)), Math.min(...ys), Math.max(...ys));
+  }
 
   /** توهّج نيون ناعم */
   glow(x, y, r, color, a = 0.5) {

@@ -113,6 +113,8 @@ class SfxEngine {
   }
 
   startAmbient() {
+    return;
+    // eslint-disable-next-line no-unreachable
     if (!this.ok() || this.amb) return;
     const c = this.ctx;
     const g = c.createGain();

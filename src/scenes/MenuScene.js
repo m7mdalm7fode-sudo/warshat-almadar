@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { W, H, T, COL, HEX, setupCamera } from '../ui/theme.js';
 import { Game } from '../state.js';
+import { Music } from '../music.js';
 import { Sfx } from '../audio.js';
 import { drawCity } from '../gfx/City.js';
 import { Character, makeLook } from '../gfx/CharacterGenerator.js';
@@ -65,7 +66,7 @@ export default class MenuScene extends Phaser.Scene {
 
     T(this, W / 2, H - 22, 'كل الرسومات والأصوات مولّدة بالكود', 12, '#5a6488', { align: 'center' }).setDepth(30);
     this.cameras.main.fadeIn(500);
-    this.input.once('pointerdown', () => Sfx.startAmbient());
+    Music.play('menu');
   }
 
   spawnShowcase() {

@@ -53,6 +53,7 @@ export default class MinigameScene extends Phaser.Scene {
     });
 
     addGlow(this, T(this, W / 2, 100, this.game0.title, 30, '#bffaff', { weight: 900, align: 'center', shadow: HEX(COL.cyan) }), COL.cyan, 3);
+    T(this, 44, 100, `مهارتك: ${data.skill || 1}`, 12, '#3dff8a', { bold: true, ox: 0 });
     this.hint = T(this, W / 2, 140, this.game0.hint, 15, '#c6d2f2', { wrap: 460, align: 'center' });
 
     // شريط الوقت

@@ -1,6 +1,7 @@
 // صندوق الحوار مع تأثير الكتابة
 import { T, COL, HEX } from './theme.js';
 import { Sfx } from '../audio.js';
+import { Voice } from '../voice.js';
 
 export class DialogBox {
   constructor(scene, y = 590) {
@@ -38,6 +39,7 @@ export class DialogBox {
     this.lines = lines.slice();
     this.cb = cb;
     this.auto = o.auto;
+    this.speaker = o.speaker || (this.s.speakerFor ? this.s.speakerFor(name) : null);
     this.active = true;
     this.next();
   }
@@ -53,6 +55,11 @@ export class DialogBox {
     }
     const line = this.lines.shift();
     this.full = line;
+    const sp = this.speaker;
+    if (sp && sp.scene) {
+      const dur = Voice.speak(line, sp.voiceProfile);
+      sp.talk(Math.max(700, dur || line.length * 45));
+    } else Voice.stop();
     this.idx = 0;
     this.typing = true;
     this.arrow.setVisible(false);
@@ -101,6 +108,7 @@ export class DialogBox {
   }
 
   hide() {
+    Voice.stop();
     this.c.setVisible(false);
     this.active = false;
     if (this.ev) { this.ev.remove(); this.ev = null; }

@@ -2,6 +2,7 @@
 import data from '../data/customers.json';
 import { makeLook, hashStr, rng } from '../gfx/CharacterGenerator.js';
 import { planSuspect, resolveSuspect, resolveOwner } from './cases.js';
+import { pickEvent, EVENTS } from './progress.js';
 
 const byId = {};
 data.story.forEach((c) => { byId[c.id] = { ...c, kind: 'story' }; });
@@ -51,6 +52,8 @@ export function buildDayQueue(st) {
 
   const suspect = planSuspect(st);
   if (suspect) special.push(suspect);
+  const ev = pickEvent(st);
+  if (ev && ev.extra) count = Math.min(9, count + ev.extra);
 
   count = Math.max(count, Math.min(8, special.length + 2));
   const q = [...special];
@@ -68,7 +71,10 @@ export function priceOf(base, st, mods) {
 export function resolveVisit(entry, st, mods) {
   if (entry.type === 'generic') {
     const r = rng(entry.seed);
-    const tpl = data.generic.problems[Math.floor(r() * data.generic.problems.length)];
+    const ev = st.event ? EVENTS[st.event] : null;
+    let probs = data.generic.problems;
+    if (ev && ev.bias && r() < 0.55) probs = probs.filter((p) => p.minigame === ev.bias);
+    const tpl = probs[Math.floor(r() * probs.length)];
     const rich = mods.payMult >= 1.4 && r() < 0.5;
     const look = makeLook(rich ? { accessory: 'chain' } : {}, entry.seed);
     const names = data.generic.names[look.species];
