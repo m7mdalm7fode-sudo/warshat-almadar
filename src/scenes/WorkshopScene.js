@@ -1,7 +1,6 @@
 import Phaser from 'phaser';
 import { W, H, T, COL, HEX, setupCamera, fmt } from '../ui/theme.js';
 import { Game, getMods, difficulty, clampRep } from '../state.js';
-import { Music } from '../music.js';
 import { Sfx, vibrate } from '../audio.js';
 import { buildDayQueue, resolveVisit, reactionLine, CUSTOMER_DATA } from '../systems/customers.js';
 import { Character, makeLook, hashStr } from '../gfx/CharacterGenerator.js';
@@ -39,7 +38,6 @@ export default class WorkshopScene extends Phaser.Scene {
     drawInterior(this, this.st);
     drawCounter(this, this.st);
     this.hands = new PlayerHands(this);
-    Music.play('work');
     addVignette(this, 0.32, 0.9);
     this.dialog = new DialogBox(this, 600);
     this.topBar = new TopBar(this, { onMenu: () => this.openMenu() });
@@ -170,7 +168,6 @@ export default class WorkshopScene extends Phaser.Scene {
       buttons: [
         { label: 'استئناف', color: COL.green },
         { label: `المؤثرات: ${s.sound ? 'تعمل' : 'مغلقة'}`, color: COL.cyan, onClick: () => { s.sound = !s.sound; Game.saveSettings(); this.time.delayedCall(10, () => this.openMenu()); } },
-        { label: `الموسيقى: ${s.music !== false ? 'تعمل' : 'مغلقة'}`, color: COL.gold, onClick: () => { s.music = s.music === false; Game.saveSettings(); Music.refresh(); this.time.delayedCall(10, () => this.openMenu()); } },
         { label: `الاهتزاز: ${s.vibration ? 'يعمل' : 'مغلق'}`, color: COL.purple, onClick: () => { s.vibration = !s.vibration; Game.saveSettings(); this.time.delayedCall(10, () => this.openMenu()); } },
         { label: 'القائمة الرئيسية', color: COL.red, onClick: () => { Game.load(); this.scene.start('Menu'); } },
       ],
@@ -508,7 +505,6 @@ export default class WorkshopScene extends Phaser.Scene {
     this.drawStall();
     if (this.item) this.tweens.add({ targets: this.item, alpha: 0.3, duration: 300 });
     if (this.itemLabel) this.itemLabel.setVisible(false);
-    Music.play('tension');
     this.stallQ = stallPrompts(3);
     this.stallI = 0;
     this.dialog.show('أنت', ['(تكتب رسالة للشرطة من تحت الطاولة...)', 'لازم أشغله بالكلام لين يوصلون.'], () => this.nextStall(), { tagColor: COL.pink });
@@ -689,7 +685,6 @@ export default class WorkshopScene extends Phaser.Scene {
     if (this.itemLabel) { this.itemLabel.destroy(); this.itemLabel = null; }
     if (this.item) { const it = this.item; this.item = null; this.tweens.add({ targets: it, alpha: 0, duration: 300, onComplete: () => it.destroy() }); }
     this.dialog.hide();
-    Music.play('work');
     this.time.delayedCall(1000, () => { this.policeLights(false); this.nextCustomer(); });
   }
 

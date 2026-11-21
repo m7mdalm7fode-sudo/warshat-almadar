@@ -1,7 +1,6 @@
 import Phaser from 'phaser';
 import { W, H, T, COL, HEX, setupCamera } from '../ui/theme.js';
 import { Game } from '../state.js';
-import { Music } from '../music.js';
 import { Voice } from '../voice.js';
 import { Sfx, vibrate } from '../audio.js';
 import { starField } from '../gfx/City.js';
@@ -16,7 +15,6 @@ export default class SettingsScene extends Phaser.Scene {
     this.modalOpen = false;
     this.from = (data && data.from) || 'Menu';
     starField(this, 100);
-    Music.play('menu');
     T(this, W / 2, 110, 'الإعدادات', 44, HEX(COL.purple), { weight: 900, align: 'center', shadow: HEX(COL.purple) });
     this.buildButtons();
     this.cameras.main.fadeIn(300);
@@ -31,13 +29,12 @@ export default class SettingsScene extends Phaser.Scene {
     const row = (y, label, on, onClick) => makeButton(this, W / 2, y, label, { w: 360, h: 62, color: on ? COL.green : COL.dim, size: 22, onClick });
     this.btns = [
       row(230, `المؤثرات: ${s.sound ? 'تعمل' : 'مغلقة'}`, s.sound, () => { s.sound = !s.sound; Game.saveSettings(); if (s.sound) Sfx.coin(); this.buildButtons(); }),
-      row(310, `الموسيقى: ${s.music !== false ? 'تعمل ♪' : 'مغلقة'}`, s.music !== false, () => { s.music = s.music === false; Game.saveSettings(); Music.refresh(); this.buildButtons(); }),
-      row(390, `أصوات الشخصيات: ${voiceNames[s.voice || 'auto']}`, (s.voice || 'auto') !== 'off', () => {
+      row(320, `أصوات الشخصيات: ${voiceNames[s.voice || 'auto']}`, (s.voice || 'auto') !== 'off', () => {
         s.voice = voiceNext[s.voice || 'auto']; Game.saveSettings(); this.buildButtons();
         if (s.voice !== 'off') Voice.speak('هلا والله، أنا زبونك الجديد', { species: 'human', pitch: 0.85 });
       }),
-      row(470, `الاهتزاز: ${s.vibration ? 'يعمل' : 'مغلق'}`, s.vibration, () => { s.vibration = !s.vibration; Game.saveSettings(); vibrate(60); this.buildButtons(); }),
-      makeButton(this, W / 2, 570, 'مسح التقدّم المحفوظ', {
+      row(410, `الاهتزاز: ${s.vibration ? 'يعمل' : 'مغلق'}`, s.vibration, () => { s.vibration = !s.vibration; Game.saveSettings(); vibrate(60); this.buildButtons(); }),
+      makeButton(this, W / 2, 520, 'مسح التقدّم المحفوظ', {
         w: 360, h: 56, color: COL.red, size: 19,
         onClick: () => modal(this, {
           title: 'متأكد؟',

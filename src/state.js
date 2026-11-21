@@ -29,7 +29,7 @@ function freshState() {
 }
 
 function loadSettings() {
-  const def = { sound: true, vibration: true, music: true, voice: 'auto' };
+  const def = { sound: true, vibration: true, voice: 'auto' };
   try {
     const raw = localStorage.getItem(SET_KEY);
     if (raw) return { ...def, ...JSON.parse(raw) };

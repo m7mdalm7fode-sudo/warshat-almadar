@@ -70,8 +70,8 @@ export function resolveOwner(entry, st) {
       lines: [...o.lost, 'تدري عنه شي يا معلّم؟'],
       moral: {
         options: [
-          { label: 'أعترف: مرّ عليّ', money: -80, rep: 0.05, reply: 'على الأقل صدقت معي... بأعطي الشرطة الوصف. خذ درس.', mood: 'sad' },
-          { label: 'ما شفته', money: 0, rep: -0.15, reply: '...طيب. الله يعوّضني.', mood: 'sad' },
+          { label: 'أعترف: مرّ عليّ', money: -80, rep: 0.05, reply: 'على الأقل صدقت معي... بعطي الشرطة الوصف، وخذها درس.', mood: 'sad' },
+          { label: 'ما شفته', money: 0, rep: -0.15, reply: 'طيب... الله يعوّضني.', mood: 'sad' },
         ],
       },
     };

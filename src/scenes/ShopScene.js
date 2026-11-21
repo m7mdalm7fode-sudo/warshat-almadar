@@ -1,7 +1,6 @@
 import Phaser from 'phaser';
 import { W, H, T, COL, HEX, setupCamera, fmt } from '../ui/theme.js';
 import { Game, UPGRADES, DESIGNS } from '../state.js';
-import { Music } from '../music.js';
 import { Sfx, vibrate } from '../audio.js';
 import { starField } from '../gfx/City.js';
 import { drawTower } from '../gfx/TowerView.js';
@@ -15,7 +14,6 @@ export default class ShopScene extends Phaser.Scene {
 
   create() {
     setupCamera(this);
-    Music.play('shop');
     if (!Game.state && !Game.load()) { this.scene.start('Menu'); return; }
     this.modalOpen = false;
     starField(this, 90);

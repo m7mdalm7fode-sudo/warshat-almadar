@@ -1,276 +1,1367 @@
 {
   "story": [
     {
-      "id": "captain_rashid", "name": "الكابتن راشد", "minDay": 1, "pay": 90,
-      "look": { "species": "human", "cover": "helmet", "outfit": "jacket", "primary": "#1f2a44", "helmet": "#e8ecf2", "accent": "#29f0ff", "accessory": "badge" },
-      "item": { "kind": "nav", "name": "بوصلة ملاحة نجمية" }, "minigame": "calibrate",
-      "dialog": ["السلام عليكم يا معلّم.", "بوصلتي الملاحية صارت تأشّر على الشمس بدل المحطة!", "عندي رحلة لحزام الكويكبات الليلة. تقدر تعايرها؟"]
+      "id": "captain_rashid",
+      "name": "الكابتن راشد",
+      "minDay": 1,
+      "pay": 90,
+      "look": {
+        "species": "human",
+        "cover": "helmet",
+        "outfit": "jacket",
+        "primary": "#1f2a44",
+        "helmet": "#e8ecf2",
+        "accent": "#29f0ff",
+        "accessory": "badge"
+      },
+      "item": {
+        "kind": "nav",
+        "name": "بوصلة ملاحة نجمية"
+      },
+      "minigame": "calibrate",
+      "dialog": [
+        "السلام عليكم يا معلّم.",
+        "البوصلة حقتي صارت تأشّر على الشمس بدال المحطة!",
+        "عندي طلعة لحزام الكويكبات الليلة، تقدر تضبطها لي؟"
+      ]
     },
     {
-      "id": "salem_haddad", "name": "سالم الحدّاد", "minDay": 1, "pay": 80,
-      "look": { "species": "human", "cover": "gasmask", "outfit": "coverall", "primary": "#8a6d3b", "secondary": "#3b2f25", "accent": "#ff7a2f" },
-      "item": { "kind": "drill", "name": "مثقاب بلازما" }, "minigame": "screws",
-      "dialog": ["هلا والله.", "المثقاب حقي يطلع صوت مثل الجمل الزعلان.", "أظن فيه شي داخل الغطاء. فكّه وشوف."]
+      "id": "salem_haddad",
+      "name": "سالم الحدّاد",
+      "minDay": 1,
+      "pay": 80,
+      "look": {
+        "species": "human",
+        "cover": "gasmask",
+        "outfit": "coverall",
+        "primary": "#8a6d3b",
+        "secondary": "#3b2f25",
+        "accent": "#ff7a2f"
+      },
+      "item": {
+        "kind": "drill",
+        "name": "مثقاب بلازما"
+      },
+      "minigame": "screws",
+      "dialog": [
+        "هلا والله.",
+        "المثقاب حقي يطلّع صوت كنّه بعير زعلان.",
+        "أظن فيه شي داخل الغطا، فكّه وشوف وش فيه."
+      ]
     },
     {
-      "id": "nox", "name": "نوكس", "minDay": 2, "pay": 100,
-      "look": { "species": "alien", "cover": "hood", "outfit": "cloak", "primary": "#2f5d50", "accent": "#3dff8a", "skin": "#6fd18a" },
-      "item": { "kind": "crystal", "name": "مذياع بلّوري" }, "minigame": "swap",
-      "dialog": ["...تحيّاتي يا ساكن المحطة.", "مذياعي البلّوري لم يعد يلتقط أغاني موطني.", "قيل لي إن يديك تعرفان القطع جيداً."]
+      "id": "nox",
+      "name": "نوكس",
+      "minDay": 2,
+      "pay": 100,
+      "look": {
+        "species": "alien",
+        "cover": "hood",
+        "outfit": "cloak",
+        "primary": "#2f5d50",
+        "accent": "#3dff8a",
+        "skin": "#6fd18a"
+      },
+      "item": {
+        "kind": "crystal",
+        "name": "مذياع بلّوري"
+      },
+      "minigame": "swap",
+      "dialog": [
+        "هلا يا ولد المحطة.",
+        "الراديو البلّوري حقي ما عاد يجيب أغاني ديرتنا.",
+        "قالوا لي إن يدينك تعرف القطع زين."
+      ]
     },
     {
-      "id": "eng_qasim", "name": "المهندس قاسم", "minDay": 2, "pay": 85,
-      "look": { "species": "human", "cover": "helmet", "outfit": "coverall", "primary": "#b5552b", "helmet": "#f08a24", "accent": "#ffc94a" },
-      "item": { "kind": "toolbox", "name": "صندوق عدّة مقفل" }, "minigame": "lock",
-      "dialog": ["يا أخي فضيحة.", "نسيت الرمز السري لصندوق عدّتي، وأنا مهندس!", "لا تقول لأحد. افتحه وخلّها بيننا."]
+      "id": "eng_qasim",
+      "name": "المهندس قاسم",
+      "minDay": 2,
+      "pay": 85,
+      "look": {
+        "species": "human",
+        "cover": "helmet",
+        "outfit": "coverall",
+        "primary": "#b5552b",
+        "helmet": "#f08a24",
+        "accent": "#ffc94a"
+      },
+      "item": {
+        "kind": "toolbox",
+        "name": "صندوق عدّة مقفل"
+      },
+      "minigame": "lock",
+      "dialog": [
+        "يا رجّال فشلة.",
+        "نسيت الرقم السري حق صندوق عدّتي، وأنا مهندس!",
+        "لا تعلّم أحد، افتحه وخلّها بيني وبينك."
+      ]
     },
     {
-      "id": "mirsal", "name": "مِرسال", "minDay": 3, "pay": 95,
-      "look": { "species": "robot", "cover": "screen", "outfit": "chassis", "metal": "#c9a227", "accent": "#29f0ff" },
-      "item": { "kind": "drone", "name": "طائرة توصيل" }, "minigame": "calibrate",
-      "dialog": ["بيب... تحية. أنا ساعي البريد مرسال.", "طائرتي توصل الطرود للعنوان الغلط.", "اشتكى مني ٤٢ زبوناً اليوم. هذا مُحرج... بيب."]
+      "id": "mirsal",
+      "name": "مِرسال",
+      "minDay": 3,
+      "pay": 95,
+      "look": {
+        "species": "robot",
+        "cover": "screen",
+        "outfit": "chassis",
+        "metal": "#c9a227",
+        "accent": "#29f0ff"
+      },
+      "item": {
+        "kind": "drone",
+        "name": "طائرة توصيل"
+      },
+      "minigame": "calibrate",
+      "dialog": [
+        "بيب... هلا. أنا مرسال، ساعي البريد.",
+        "طيارتي توصّل الطرود للعنوان الغلط.",
+        "اشتكى عليّ اثنين وأربعين زبون اليوم... فشلة. بيب."
+      ]
     },
     {
-      "id": "hamdan", "name": "حمدان أبو الفلافل", "minDay": 3, "pay": 75,
-      "look": { "species": "human", "cover": "shemagh", "outfit": "thobe", "primary": "#e9e4d8", "pattern": "red", "accent": "#ffc94a" },
-      "item": { "kind": "robotarm", "name": "ذراع قلي آلية" }, "minigame": "clean",
-      "dialog": ["يا هلا بجاري!", "ذراع القلي عندي غرقت زيت وصدأ.", "الطابور عندي طويل، الله يخليك بسرعة."]
+      "id": "hamdan",
+      "name": "حمدان أبو الفلافل",
+      "minDay": 3,
+      "pay": 75,
+      "look": {
+        "species": "human",
+        "cover": "shemagh",
+        "outfit": "thobe",
+        "primary": "#e9e4d8",
+        "pattern": "red",
+        "accent": "#ffc94a"
+      },
+      "item": {
+        "kind": "robotarm",
+        "name": "ذراع قلي آلية"
+      },
+      "minigame": "clean",
+      "dialog": [
+        "يا هلا بجاري!",
+        "ذراع القلي عندي غرقت زيت وصدّت.",
+        "الطابور عندي طويل، الله يخليك عجّل علي."
+      ]
     },
     {
-      "id": "stranger_bag", "name": "الغريب ذو الحقيبة", "minDay": 3, "pay": 120,
-      "look": { "species": "human", "cover": "hood", "outfit": "cloak", "primary": "#1c1a24", "accent": "#ff4d5e", "accessory": "pack" },
-      "item": { "kind": "phone", "name": "جهاز اتصال فاخر" }, "minigame": "lock",
-      "dialog": ["...لا تطالع فيّ كذا.", "هذا الجهاز... لي. أكيد لي.", "بس نسيت رمزه. افتحه وأدفع لك ضعف السعر، وبدون أسئلة."],
+      "id": "stranger_bag",
+      "name": "الغريب ذو الحقيبة",
+      "minDay": 3,
+      "pay": 120,
+      "look": {
+        "species": "human",
+        "cover": "hood",
+        "outfit": "cloak",
+        "primary": "#1c1a24",
+        "accent": "#ff4d5e",
+        "accessory": "pack"
+      },
+      "item": {
+        "kind": "phone",
+        "name": "جهاز اتصال فاخر"
+      },
+      "minigame": "lock",
+      "dialog": [
+        "لا تطالع فيني كذا.",
+        "هالجهاز... حقي. أكيد حقي.",
+        "بس نسيت رقمه السري. افتحه وأعطيك الضعف، وبدون أسئلة."
+      ],
       "moral": {
         "options": [
-          { "label": "افتحه (٢٥٠)", "repair": true, "money": 250, "rep": -0.4, "flags": ["stolen_unlocked"], "schedule": [{ "id": "officer_stolen", "delay": 2 }], "reply": "أحسنت... لا شفتني ولا شفتك.", "mood": "money" },
-          { "label": "ارفض بهدوء", "money": 0, "rep": 0, "reply": "براحتك... فيه غيرك بالسوق.", "mood": "no" },
-          { "label": "ارفض وبلّغ الأمن", "money": 0, "rep": 0.3, "flags": ["reported_thief"], "schedule": [{ "id": "officer_reward", "delay": 2 }], "reply": "...!! (يخطف الجهاز ويهرب)", "mood": "angry" }
+          {
+            "label": "افتحه (٢٥٠)",
+            "repair": true,
+            "money": 250,
+            "rep": -0.4,
+            "flags": [
+              "stolen_unlocked"
+            ],
+            "schedule": [
+              {
+                "id": "officer_stolen",
+                "delay": 2
+              }
+            ],
+            "reply": "كفو... لا شفتني ولا شفتك.",
+            "mood": "money"
+          },
+          {
+            "label": "ارفض بهدوء",
+            "money": 0,
+            "rep": 0,
+            "reply": "براحتك... غيرك واجد بالسوق.",
+            "mood": "no"
+          },
+          {
+            "label": "ارفض وبلّغ الأمن",
+            "money": 0,
+            "rep": 0.3,
+            "flags": [
+              "reported_thief"
+            ],
+            "schedule": [
+              {
+                "id": "officer_reward",
+                "delay": 2
+              }
+            ],
+            "reply": "(يخطف الجهاز ويشرد)",
+            "mood": "angry"
+          }
         ]
       }
     },
     {
-      "id": "sheikh_mubarak", "name": "الشيخ مبارك", "minDay": 4, "pay": 180,
-      "look": { "species": "human", "cover": "shemagh", "outfit": "thobe", "primary": "#f4f1e8", "pattern": "white", "bisht": "#3b2a1a", "accent": "#ffc94a", "accessory": "chain" },
-      "item": { "kind": "safe", "name": "خزنة الجدّ الذهبية" }, "minigame": "lock",
-      "dialog": ["السلام عليكم ورحمة الله.", "هذي خزنة جدّي، جابها معه من الأرض قبل مئة سنة.", "الرمز ضاع مع الزمن. افتحها ولك ما يرضيك."]
+      "id": "sheikh_mubarak",
+      "name": "الشيخ مبارك",
+      "minDay": 4,
+      "pay": 180,
+      "look": {
+        "species": "human",
+        "cover": "shemagh",
+        "outfit": "thobe",
+        "primary": "#f4f1e8",
+        "pattern": "white",
+        "bisht": "#3b2a1a",
+        "accent": "#ffc94a",
+        "accessory": "chain"
+      },
+      "item": {
+        "kind": "safe",
+        "name": "خزنة الجدّ الذهبية"
+      },
+      "minigame": "lock",
+      "dialog": [
+        "السلام عليكم ورحمة الله.",
+        "هذي خزنة جدّي، جابها معه من الأرض قبل مية سنة.",
+        "والرقم ضاع مع الزمن، افتحها ولك اللي يرضيك."
+      ]
     },
     {
-      "id": "smuggler_zaid", "name": "زيد", "minDay": 4, "pay": 110, "lookSeed": "zaid", "memKey": "zaid",
-      "look": { "species": "human", "cover": "gasmask", "outfit": "jacket", "primary": "#2b2b2b", "secondary": "#4a1d1d", "accent": "#ff3fa4", "accessory": "shoulderLamp" },
-      "item": { "kind": "coil", "name": "ملف طاقة بلا أوراق" }, "minigame": "swap",
-      "dialog": ["صباح الخير يا شريك.", "عندي ملف طاقة من النوع... اللي ما يدخل المحطة رسمياً.", "ركّبه في محرّكي وأعطيك ثلاثمية. وش رايك؟"],
+      "id": "smuggler_zaid",
+      "name": "زيد",
+      "minDay": 4,
+      "pay": 110,
+      "lookSeed": "zaid",
+      "memKey": "zaid",
+      "look": {
+        "species": "human",
+        "cover": "gasmask",
+        "outfit": "jacket",
+        "primary": "#2b2b2b",
+        "secondary": "#4a1d1d",
+        "accent": "#ff3fa4",
+        "accessory": "shoulderLamp"
+      },
+      "item": {
+        "kind": "coil",
+        "name": "ملف طاقة بلا أوراق"
+      },
+      "minigame": "swap",
+      "dialog": [
+        "صباح الخير يا شريك.",
+        "عندي ملف طاقة من النوع... اللي ما يدخل المحطة رسمي.",
+        "ركّبه في مكينتي وأعطيك ثلاث مية. وش رايك؟"
+      ],
       "moral": {
         "options": [
-          { "label": "ركّبه (٣٠٠)", "repair": true, "money": 300, "rep": -0.3, "flags": ["smuggler_helped"], "schedule": [{ "id": "zaid_return", "delay": 3 }], "reply": "هذا الكلام! أنت رجّال أعمال.", "mood": "money" },
-          { "label": "ارفض القطعة المهرّبة", "money": 0, "rep": 0.15, "reply": "خسرت فرصة العمر يا معلّم.", "mood": "no" }
+          {
+            "label": "ركّبه (٣٠٠)",
+            "repair": true,
+            "money": 300,
+            "rep": -0.3,
+            "flags": [
+              "smuggler_helped"
+            ],
+            "schedule": [
+              {
+                "id": "zaid_return",
+                "delay": 3
+              }
+            ],
+            "reply": "هذا الكلام! أنت رجّال سوق.",
+            "mood": "money"
+          },
+          {
+            "label": "ارفض القطعة المهرّبة",
+            "money": 0,
+            "rep": 0.15,
+            "reply": "خسرت فرصة عمرك يا معلّم.",
+            "mood": "no"
+          }
         ]
       }
     },
     {
-      "id": "omran", "name": "عمران", "minDay": 4, "pay": 60, "lookSeed": "omran", "memKey": "omran",
-      "look": { "species": "human", "cover": "hood", "outfit": "cloak", "primary": "#6b4f3a", "accent": "#ffc94a", "accessory": "scarf" },
-      "item": { "kind": "mask", "name": "قناع أكسجين صغير" }, "minigame": "clean",
-      "dialog": ["عذراً يا سيدي...", "قناع الأكسجين لابني تعطّل، والهواء في المخيّم ثقيل.", "ما معي إلا هالقطع النحاسية... ما تكفي، أعرف."],
+      "id": "omran",
+      "name": "عمران",
+      "minDay": 4,
+      "pay": 60,
+      "lookSeed": "omran",
+      "memKey": "omran",
+      "look": {
+        "species": "human",
+        "cover": "hood",
+        "outfit": "cloak",
+        "primary": "#6b4f3a",
+        "accent": "#ffc94a",
+        "accessory": "scarf"
+      },
+      "item": {
+        "kind": "mask",
+        "name": "قناع أكسجين صغير"
+      },
+      "minigame": "clean",
+      "dialog": [
+        "السموحة يا معلّم...",
+        "قناع الأكسجين حق ولدي خرب، والهوا في المخيّم ثقيل.",
+        "ما معي إلا هالقطع النحاس... أدري إنها ما تكفي."
+      ],
       "moral": {
         "options": [
-          { "label": "صلّحه مجاناً", "repair": true, "money": 0, "rep": 0.5, "flags": ["helped_refugee"], "schedule": [{ "id": "omran_return", "delay": 4 }], "reply": "الله يجزاك خير... ما أنسى معروفك.", "mood": "great" },
-          { "label": "خذ القطع (٢٠)", "repair": true, "money": 20, "rep": 0.2, "reply": "شكراً لك... شكراً.", "mood": "happy" },
-          { "label": "اطلب أجرك كاملاً", "money": 0, "rep": -0.2, "reply": "...أفهمك. الله يعين.", "mood": "sad" }
+          {
+            "label": "صلّحه مجاناً",
+            "repair": true,
+            "money": 0,
+            "rep": 0.5,
+            "flags": [
+              "helped_refugee"
+            ],
+            "schedule": [
+              {
+                "id": "omran_return",
+                "delay": 4
+              }
+            ],
+            "reply": "الله يجزاك خير... ما أنسى لك هالمعروف.",
+            "mood": "great"
+          },
+          {
+            "label": "خذ القطع (٢٠)",
+            "repair": true,
+            "money": 20,
+            "rep": 0.2,
+            "reply": "مشكور... الله يعطيك العافية.",
+            "mood": "happy"
+          },
+          {
+            "label": "اطلب أجرك كاملاً",
+            "money": 0,
+            "rep": -0.2,
+            "reply": "أفهمك... الله يعين.",
+            "mood": "sad"
+          }
         ]
       }
     },
     {
-      "id": "pilot_yasser", "name": "الطيّار ياسر", "minDay": 5, "pay": 120,
-      "look": { "species": "human", "cover": "helmet", "outfit": "jacket", "primary": "#7a2e3a", "helmet": "#9c2f2f", "accent": "#ffc94a", "accessory": "antenna" },
-      "item": { "kind": "jetpack", "name": "حقيبة نفّاثة" }, "minigame": "wires",
-      "dialog": ["عجّل يا بطل!", "حقيبتي النفّاثة ترفعني مترين وتطيّحني.", "السباق بعد ساعة، والجايزة كبيرة."]
+      "id": "pilot_yasser",
+      "name": "الطيّار ياسر",
+      "minDay": 5,
+      "pay": 120,
+      "look": {
+        "species": "human",
+        "cover": "helmet",
+        "outfit": "jacket",
+        "primary": "#7a2e3a",
+        "helmet": "#9c2f2f",
+        "accent": "#ffc94a",
+        "accessory": "antenna"
+      },
+      "item": {
+        "kind": "jetpack",
+        "name": "حقيبة نفّاثة"
+      },
+      "minigame": "wires",
+      "dialog": [
+        "عجّل يا بطل!",
+        "الشنطة النفّاثة حقتي ترفعني مترين وتطيّحني.",
+        "السباق بعد ساعة، والجايزة كبيرة."
+      ]
     },
     {
-      "id": "inspector_nader", "name": "المفتّش نادر", "minDay": 5, "pay": 0, "lookSeed": "nader", "memKey": "nader",
-      "look": { "species": "human", "cover": "helmet", "outfit": "armor", "primary": "#44475a", "helmet": "#d6dbe3", "accent": "#ffc94a", "accessory": "badge" },
-      "dialog": ["تفتيش السلامة. لا تتحرّك.", "رخصة ورشتك... فيها ملاحظات كثيرة.", "ممكن أتغاضى عنها مقابل مئة وخمسين كريدت. هدية بسيطة."],
+      "id": "inspector_nader",
+      "name": "المفتّش نادر",
+      "minDay": 5,
+      "pay": 0,
+      "lookSeed": "nader",
+      "memKey": "nader",
+      "look": {
+        "species": "human",
+        "cover": "helmet",
+        "outfit": "armor",
+        "primary": "#44475a",
+        "helmet": "#d6dbe3",
+        "accent": "#ffc94a",
+        "accessory": "badge"
+      },
+      "dialog": [
+        "تفتيش سلامة، لا تتحرك.",
+        "رخصة ورشتك... فيها ملاحظات واجد.",
+        "أقدر أطنّش عنها بمية وخمسين كريدت. هدية بسيطة."
+      ],
       "moral": {
         "options": [
-          { "label": "ادفع الرشوة (١٥٠)", "money": -150, "rep": 0, "flags": ["bribed_inspector"], "schedule": [{ "id": "inspector_return", "delay": 3 }], "reply": "عاقل. نشوفك قريب.", "mood": "money" },
-          { "label": "ارفض وأظهر أوراقك", "check": { "rep": 2.5 },
-            "pass": { "money": 0, "rep": 0.3, "reply": "أوراقك... سليمة. طيب، يوم سعيد.", "mood": "no" },
-            "fail": { "money": -100, "rep": 0.1, "reply": "مخالفة رسمية! مئة كريدت. سمعتك ما تشفع لك.", "mood": "angry" } }
+          {
+            "label": "ادفع الرشوة (١٥٠)",
+            "money": -150,
+            "rep": 0,
+            "flags": [
+              "bribed_inspector"
+            ],
+            "schedule": [
+              {
+                "id": "inspector_return",
+                "delay": 3
+              }
+            ],
+            "reply": "عاقل. نشوفك قريب.",
+            "mood": "money"
+          },
+          {
+            "label": "ارفض وأظهر أوراقك",
+            "check": {
+              "rep": 2.5
+            },
+            "pass": {
+              "money": 0,
+              "rep": 0.3,
+              "reply": "أوراقك... سليمة. طيب، يومك سعيد.",
+              "mood": "no"
+            },
+            "fail": {
+              "money": -100,
+              "rep": 0.1,
+              "reply": "مخالفة رسمية! مية كريدت، وسمعتك ما تشفع لك.",
+              "mood": "angry"
+            }
+          }
         ]
       }
     },
     {
-      "id": "khaled_miner", "name": "خالد المنجّم", "minDay": 6, "pay": 130,
-      "look": { "species": "human", "cover": "gasmask", "outfit": "armor", "primary": "#5c6b73", "secondary": "#2f3b44", "accent": "#ffc94a", "accessory": "shoulderLamp" },
-      "item": { "kind": "generator", "name": "مولّد منجم" }, "minigame": "screws",
-      "dialog": ["يا ساتر، الغبار في الحزام ما يرحم.", "المولّد حقنا وقف في نص الوردية.", "عشرين عامل ينتظرون الكهرب. الله يخليك."]
+      "id": "khaled_miner",
+      "name": "خالد المنجّم",
+      "minDay": 6,
+      "pay": 130,
+      "look": {
+        "species": "human",
+        "cover": "gasmask",
+        "outfit": "armor",
+        "primary": "#5c6b73",
+        "secondary": "#2f3b44",
+        "accent": "#ffc94a",
+        "accessory": "shoulderLamp"
+      },
+      "item": {
+        "kind": "generator",
+        "name": "مولّد منجم"
+      },
+      "minigame": "screws",
+      "dialog": [
+        "يا ساتر، غبار الحزام ما يرحم.",
+        "المولّد حقنا طفى في نص الوردية.",
+        "عشرين عامل ينتظرون الكهربا، الله يخليك."
+      ]
     },
     {
-      "id": "waddah", "name": "رجل الأعمال وضّاح", "minDay": 6, "pay": 0,
-      "look": { "species": "human", "cover": "helmet", "outfit": "jacket", "primary": "#1f2a44", "helmet": "#c9a227", "accent": "#ffc94a", "accessory": "chain" },
-      "item": { "kind": "generator", "name": "مولّد ورشة منافسة" }, "minigame": "wires",
-      "dialog": ["أنت الفنّي اللي يمدحونه؟ ممتاز.", "هذا مولّد ورشة منافسي... وصلني بطريقتي.", "أبيك تصلّحه بطريقة تخلّيه يحترق بعد أسبوع. أربعمية لك."],
+      "id": "waddah",
+      "name": "رجل الأعمال وضّاح",
+      "minDay": 6,
+      "pay": 0,
+      "look": {
+        "species": "human",
+        "cover": "helmet",
+        "outfit": "jacket",
+        "primary": "#1f2a44",
+        "helmet": "#c9a227",
+        "accent": "#ffc94a",
+        "accessory": "chain"
+      },
+      "item": {
+        "kind": "generator",
+        "name": "مولّد ورشة منافسة"
+      },
+      "minigame": "wires",
+      "dialog": [
+        "أنت الفنّي اللي يمدحونه؟ زين.",
+        "هذا مولّد ورشة منافسي... وصلني بطريقتي.",
+        "أبيك تصلّحه بطريقة تخليه يحترق بعد أسبوع، ولك أربع مية."
+      ],
       "moral": {
         "options": [
-          { "label": "اقبل الرشوة (٤٠٠)", "repair": true, "money": 400, "rep": -0.6, "flags": ["sabotaged"], "schedule": [{ "id": "officer_sabotage", "delay": 2 }], "reply": "ذكي. السوق للأقوياء.", "mood": "money" },
-          { "label": "ارفض الرشوة", "money": 0, "rep": 0.25, "reply": "ستندم... السوق صغير.", "mood": "angry" }
+          {
+            "label": "اقبل الرشوة (٤٠٠)",
+            "repair": true,
+            "money": 400,
+            "rep": -0.6,
+            "flags": [
+              "sabotaged"
+            ],
+            "schedule": [
+              {
+                "id": "officer_sabotage",
+                "delay": 2
+              }
+            ],
+            "reply": "ذيب. السوق للقوي.",
+            "mood": "money"
+          },
+          {
+            "label": "ارفض الرشوة",
+            "money": 0,
+            "rep": 0.25,
+            "reply": "بتندم... السوق صغير.",
+            "mood": "angry"
+          }
         ]
       }
     },
     {
-      "id": "officer_stolen", "name": "الرقيب صخر", "trigger": true, "requires": ["stolen_unlocked"], "lookSeed": "officer", "memKey": "officer", "pay": 0,
-      "look": { "species": "human", "cover": "shemagh", "outfit": "armor", "primary": "#23262d", "pattern": "black", "accent": "#29f0ff", "accessory": "badge" },
-      "dialog": ["الرقيب صخر، أمن المدار.", "وصلنا بلاغ عن جهاز مسروق انفتح قفله في ورشة بهالسوق.", "ورشتك؟ تكلّم بصراحة."],
+      "id": "officer_stolen",
+      "name": "الرقيب صخر",
+      "trigger": true,
+      "requires": [
+        "stolen_unlocked"
+      ],
+      "lookSeed": "officer",
+      "memKey": "officer",
+      "pay": 0,
+      "look": {
+        "species": "human",
+        "cover": "shemagh",
+        "outfit": "armor",
+        "primary": "#23262d",
+        "pattern": "black",
+        "accent": "#29f0ff",
+        "accessory": "badge"
+      },
+      "dialog": [
+        "الرقيب صخر، أمن المدار.",
+        "جانا بلاغ إن جهاز مسروق انفتح قفله في ورشة بهالسوق.",
+        "ورشتك؟ تكلّم بصراحة."
+      ],
       "moral": {
         "options": [
-          { "label": "اعترف", "money": -150, "rep": 0.1, "reply": "صراحتك تشفع لك. غرامة مئة وخمسين، ولا تعيدها.", "mood": "yes" },
-          { "label": "أنكر", "check": { "rep": 3 },
-            "pass": { "money": 0, "rep": -0.1, "reply": "...سمعتك تشهد لك. هالمرة بس.", "mood": "thinking" },
-            "fail": { "money": -300, "rep": -0.4, "reply": "الكاميرات ما تكذب! غرامة ثلاثمية.", "mood": "angry" } }
+          {
+            "label": "اعترف",
+            "money": -150,
+            "rep": 0.1,
+            "reply": "صراحتك شفعت لك. الغرامة مية وخمسين، ولا تعيدها.",
+            "mood": "yes"
+          },
+          {
+            "label": "أنكر",
+            "check": {
+              "rep": 3
+            },
+            "pass": {
+              "money": 0,
+              "rep": -0.1,
+              "reply": "سمعتك تشهد لك... هالمرة بس.",
+              "mood": "thinking"
+            },
+            "fail": {
+              "money": -300,
+              "rep": -0.4,
+              "reply": "الكاميرات ما تكذب! غرامة ثلاث مية.",
+              "mood": "angry"
+            }
+          }
         ]
       }
     },
     {
-      "id": "officer_reward", "name": "الرقيب صخر", "trigger": true, "requires": ["reported_thief"], "lookSeed": "officer", "memKey": "officer", "pay": 0,
-      "look": { "species": "human", "cover": "shemagh", "outfit": "armor", "primary": "#23262d", "pattern": "black", "accent": "#29f0ff", "accessory": "badge" },
-      "dialog": ["الرقيب صخر، أمن المدار.", "بلاغك أوقع عصابة سرقة أجهزة كاملة!", "هذي مكافأة من إدارة المحطة. أمثالك قليلين."],
-      "moral": { "options": [ { "label": "شكراً يا رقيب (+٢٠٠)", "money": 200, "rep": 0.4, "reply": "الشكر لك. المحطة تحتاج أمثالك.", "mood": "great" } ] }
-    },
-    {
-      "id": "officer_sabotage", "name": "الرقيب صخر", "trigger": true, "requires": ["sabotaged"], "lookSeed": "officer", "memKey": "officer", "pay": 0,
-      "look": { "species": "human", "cover": "shemagh", "outfit": "armor", "primary": "#23262d", "pattern": "black", "accent": "#29f0ff", "accessory": "badge" },
-      "dialog": ["الرقيب صخر.", "مولّد ورشة احترق، وصاحبه يقول إنه طلع من عندك.", "التحقيق يقول إن أحداً عبث بالأسلاك عمداً."],
+      "id": "officer_reward",
+      "name": "الرقيب صخر",
+      "trigger": true,
+      "requires": [
+        "reported_thief"
+      ],
+      "lookSeed": "officer",
+      "memKey": "officer",
+      "pay": 0,
+      "look": {
+        "species": "human",
+        "cover": "shemagh",
+        "outfit": "armor",
+        "primary": "#23262d",
+        "pattern": "black",
+        "accent": "#29f0ff",
+        "accessory": "badge"
+      },
+      "dialog": [
+        "الرقيب صخر، أمن المدار.",
+        "بلاغك طيّح عصابة سرقة أجهزة كاملة!",
+        "وهذي مكافأة من إدارة المحطة. أمثالك قليل."
+      ],
       "moral": {
         "options": [
-          { "label": "اعترف وادفع التعويض", "money": -300, "rep": -0.2, "reply": "على الأقل ما كذبت. لا أشوفك هنا مرة ثانية.", "mood": "no" },
-          { "label": "أنكر", "check": { "rep": 3.5 },
-            "pass": { "money": 0, "rep": -0.3, "reply": "ما عندي دليل كافي... بعد.", "mood": "thinking" },
-            "fail": { "money": -500, "rep": -0.6, "reply": "بصماتك على الأسلاك! غرامة خمسمية.", "mood": "angry" } }
+          {
+            "label": "شكراً يا رقيب (+٢٠٠)",
+            "money": 200,
+            "rep": 0.4,
+            "reply": "الشكر لك، المحطة تبي أمثالك.",
+            "mood": "great"
+          }
         ]
       }
     },
     {
-      "id": "zaid_return", "name": "زيد", "trigger": true, "requires": ["smuggler_helped"], "lookSeed": "zaid", "memKey": "zaid", "pay": 150,
-      "look": { "species": "human", "cover": "gasmask", "outfit": "jacket", "primary": "#2b2b2b", "secondary": "#4a1d1d", "accent": "#ff3fa4", "accessory": "shoulderLamp" },
-      "item": { "kind": "generator", "name": "محرّك بلا أوراق" }, "minigame": "screws",
-      "dialog": ["شريكي العزيز! رجعت لك.", "المرة هذي الشحنة أكبر: محرّك كامل بقطع ما لها أوراق.", "ستمية كريدت. وش تقول؟"],
+      "id": "officer_sabotage",
+      "name": "الرقيب صخر",
+      "trigger": true,
+      "requires": [
+        "sabotaged"
+      ],
+      "lookSeed": "officer",
+      "memKey": "officer",
+      "pay": 0,
+      "look": {
+        "species": "human",
+        "cover": "shemagh",
+        "outfit": "armor",
+        "primary": "#23262d",
+        "pattern": "black",
+        "accent": "#29f0ff",
+        "accessory": "badge"
+      },
+      "dialog": [
+        "الرقيب صخر.",
+        "مولّد ورشة احترق، وصاحبه يقول إنه طالع من عندك.",
+        "والتحقيق يقول إن أحد لعب بالأسلاك متعمّد."
+      ],
       "moral": {
         "options": [
-          { "label": "اقبل (٦٠٠)", "repair": true, "money": 600, "rep": -0.5, "flags": ["smuggler_deep"], "schedule": [{ "id": "officer_raid", "delay": 2 }], "reply": "أنت كنز يا شريك!", "mood": "money" },
-          { "label": "ارفض نهائياً", "money": 0, "rep": 0.25, "reply": "...عقلك أكبر من جيبك. وداعاً.", "mood": "no" }
+          {
+            "label": "اعترف وادفع التعويض",
+            "money": -300,
+            "rep": -0.2,
+            "reply": "على الأقل ما كذبت. لا أشوفك هنا مرة ثانية.",
+            "mood": "no"
+          },
+          {
+            "label": "أنكر",
+            "check": {
+              "rep": 3.5
+            },
+            "pass": {
+              "money": 0,
+              "rep": -0.3,
+              "reply": "ما عندي دليل كافي... للحين.",
+              "mood": "thinking"
+            },
+            "fail": {
+              "money": -500,
+              "rep": -0.6,
+              "reply": "بصماتك على الأسلاك! غرامة خمس مية.",
+              "mood": "angry"
+            }
+          }
         ]
       }
     },
     {
-      "id": "officer_raid", "name": "الرقيب صخر", "trigger": true, "requires": ["smuggler_deep"], "lookSeed": "officer", "memKey": "officer", "pay": 0,
-      "look": { "species": "human", "cover": "shemagh", "outfit": "armor", "primary": "#23262d", "pattern": "black", "accent": "#29f0ff", "accessory": "badge" },
-      "dialog": ["الرقيب صخر. هالمرة جاي رسمي.", "زيد المهرّب انمسك، واعترف بكل الورش اللي تعاملت معه.", "واسمك أول اسم."],
-      "moral": { "options": [ { "label": "ادفع الغرامة (٥٠٠)", "money": -500, "rep": -0.8, "reply": "واعتبر نفسك محظوظ إن الورشة ما انقفلت.", "mood": "angry" } ] }
-    },
-    {
-      "id": "omran_return", "name": "عمران", "trigger": true, "requires": ["helped_refugee"], "lookSeed": "omran", "memKey": "omran", "pay": 0,
-      "look": { "species": "human", "cover": "hood", "outfit": "cloak", "primary": "#6b4f3a", "accent": "#ffc94a", "accessory": "scarf" },
-      "dialog": ["تذكرني؟ أنا عمران.", "ابني صار يتنفّس زين، والحمد لله لقيت شغل في الميناء.", "هذي هدية بسيطة... ودعاء من القلب."],
-      "moral": { "options": [ { "label": "الله يحفظكم (+٢٥٠)", "money": 250, "rep": 0.3, "reply": "بلّغ سلامي لأهل السوق. كلهم يمدحونك.", "mood": "great" } ] }
-    },
-    {
-      "id": "inspector_return", "name": "المفتّش نادر", "trigger": true, "requires": ["bribed_inspector"], "excludes": ["reported_inspector"], "lookSeed": "nader", "memKey": "nader", "pay": 0,
-      "look": { "species": "human", "cover": "helmet", "outfit": "armor", "primary": "#44475a", "helmet": "#d6dbe3", "accent": "#ffc94a", "accessory": "badge" },
-      "dialog": ["المفتّش نادر. اشتقت لي؟", "الملاحظات رجعت... تعرف كيف تمشي الأمور.", "مئتين هالمرة."],
+      "id": "zaid_return",
+      "name": "زيد",
+      "trigger": true,
+      "requires": [
+        "smuggler_helped"
+      ],
+      "lookSeed": "zaid",
+      "memKey": "zaid",
+      "pay": 150,
+      "look": {
+        "species": "human",
+        "cover": "gasmask",
+        "outfit": "jacket",
+        "primary": "#2b2b2b",
+        "secondary": "#4a1d1d",
+        "accent": "#ff3fa4",
+        "accessory": "shoulderLamp"
+      },
+      "item": {
+        "kind": "generator",
+        "name": "محرّك بلا أوراق"
+      },
+      "minigame": "screws",
+      "dialog": [
+        "شريكي الغالي! رجعت لك.",
+        "هالمرة الشحنة أكبر: مكينة كاملة بقطع ما لها أوراق.",
+        "ست مية كريدت. وش تقول؟"
+      ],
       "moral": {
         "options": [
-          { "label": "ادفع (٢٠٠)", "money": -200, "rep": 0, "schedule": [{ "id": "inspector_return", "delay": 4 }], "reply": "نتفاهم دايماً.", "mood": "money" },
-          { "label": "ارفض وبلّغ عنه", "money": 0, "rep": 0.4, "flags": ["reported_inspector"], "reply": "...!! ما تقدر تثبت شي!", "mood": "angry" }
+          {
+            "label": "اقبل (٦٠٠)",
+            "repair": true,
+            "money": 600,
+            "rep": -0.5,
+            "flags": [
+              "smuggler_deep"
+            ],
+            "schedule": [
+              {
+                "id": "officer_raid",
+                "delay": 2
+              }
+            ],
+            "reply": "أنت كنز يا شريك!",
+            "mood": "money"
+          },
+          {
+            "label": "ارفض نهائياً",
+            "money": 0,
+            "rep": 0.25,
+            "reply": "عقلك أكبر من جيبك... مع السلامة.",
+            "mood": "no"
+          }
+        ]
+      }
+    },
+    {
+      "id": "officer_raid",
+      "name": "الرقيب صخر",
+      "trigger": true,
+      "requires": [
+        "smuggler_deep"
+      ],
+      "lookSeed": "officer",
+      "memKey": "officer",
+      "pay": 0,
+      "look": {
+        "species": "human",
+        "cover": "shemagh",
+        "outfit": "armor",
+        "primary": "#23262d",
+        "pattern": "black",
+        "accent": "#29f0ff",
+        "accessory": "badge"
+      },
+      "dialog": [
+        "الرقيب صخر، وهالمرة جاي رسمي.",
+        "زيد المهرّب انمسك، واعترف بكل الورش اللي تعامل معها.",
+        "واسمك أول اسم."
+      ],
+      "moral": {
+        "options": [
+          {
+            "label": "ادفع الغرامة (٥٠٠)",
+            "money": -500,
+            "rep": -0.8,
+            "reply": "واحمد ربك إن الورشة ما تسكّرت.",
+            "mood": "angry"
+          }
+        ]
+      }
+    },
+    {
+      "id": "omran_return",
+      "name": "عمران",
+      "trigger": true,
+      "requires": [
+        "helped_refugee"
+      ],
+      "lookSeed": "omran",
+      "memKey": "omran",
+      "pay": 0,
+      "look": {
+        "species": "human",
+        "cover": "hood",
+        "outfit": "cloak",
+        "primary": "#6b4f3a",
+        "accent": "#ffc94a",
+        "accessory": "scarf"
+      },
+      "dialog": [
+        "تذكرني؟ أنا عمران.",
+        "ولدي صار يتنفس زين، والحمد لله لقيت شغل في الميناء.",
+        "هذي هدية بسيطة... ودعوة من القلب."
+      ],
+      "moral": {
+        "options": [
+          {
+            "label": "الله يحفظكم (+٢٥٠)",
+            "money": 250,
+            "rep": 0.3,
+            "reply": "سلّم لي على أهل السوق، كلهم يمدحونك.",
+            "mood": "great"
+          }
+        ]
+      }
+    },
+    {
+      "id": "inspector_return",
+      "name": "المفتّش نادر",
+      "trigger": true,
+      "requires": [
+        "bribed_inspector"
+      ],
+      "excludes": [
+        "reported_inspector"
+      ],
+      "lookSeed": "nader",
+      "memKey": "nader",
+      "pay": 0,
+      "look": {
+        "species": "human",
+        "cover": "helmet",
+        "outfit": "armor",
+        "primary": "#44475a",
+        "helmet": "#d6dbe3",
+        "accent": "#ffc94a",
+        "accessory": "badge"
+      },
+      "dialog": [
+        "المفتّش نادر، اشتقت لي؟",
+        "الملاحظات رجعت... وتعرف كيف تمشي الأمور.",
+        "مئتين هالمرة."
+      ],
+      "moral": {
+        "options": [
+          {
+            "label": "ادفع (٢٠٠)",
+            "money": -200,
+            "rep": 0,
+            "schedule": [
+              {
+                "id": "inspector_return",
+                "delay": 4
+              }
+            ],
+            "reply": "نتفاهم دايم.",
+            "mood": "money"
+          },
+          {
+            "label": "ارفض وبلّغ عنه",
+            "money": 0,
+            "rep": 0.4,
+            "flags": [
+              "reported_inspector"
+            ],
+            "reply": "ما تقدر تثبت شي!",
+            "mood": "angry"
+          }
         ]
       }
     }
   ],
-
   "recurring": [
     {
-      "id": "abu_fahad", "name": "أبو فهد", "minDay": 1, "cooldown": 2,
-      "look": { "species": "human", "cover": "shemagh", "outfit": "thobe", "primary": "#e9e4d8", "pattern": "red", "accent": "#ff7a2f" },
-      "memory": { "good": "ما شاء الله، شغلك آخر مرة كان نظيف!", "bad": "آخر مرة... خلّنا نقول ما كانت أفضل شي.", "refused": "رفضتني آخر مرة، بس قلبي أبيض." },
+      "id": "abu_fahad",
+      "name": "أبو فهد",
+      "minDay": 1,
+      "cooldown": 2,
+      "look": {
+        "species": "human",
+        "cover": "shemagh",
+        "outfit": "thobe",
+        "primary": "#e9e4d8",
+        "pattern": "red",
+        "accent": "#ff7a2f"
+      },
+      "memory": {
+        "good": "ما شاء الله، شغلك آخر مرة كان نظيف!",
+        "bad": "آخر مرة... خلنا نقول ما كان أحسن شي.",
+        "refused": "رديتني آخر مرة، بس قلبي أبيض."
+      },
       "visits": [
-        { "item": { "kind": "cooler", "name": "مكيّف جيب" }, "minigame": "clean", "pay": 70, "dialog": ["يا هلا ومرحبا يا ولدي.", "المكيّف الصغير حقي صار ينفخ غبار بدل الهوا.", "نظّفه لي، الحر في القطاع السابع ما يرحم."] },
-        { "item": { "kind": "radio", "name": "مذياع قديم" }, "minigame": "wires", "pay": 80, "dialog": ["المذياع ما عاد يجيب إذاعة المحطة.", "أبي أسمع نشرة النيازك قبل لا أطلع."] },
-        { "item": { "kind": "dallah", "name": "دلّة إلكترونية" }, "minigame": "calibrate", "pay": 85, "dialog": ["الدلّة الذكية تحرق القهوة!", "وعندي ضيوف الليلة، فشيلة لو ما زبطت."] },
-        { "item": { "kind": "lamp", "name": "فانوس شمسي" }, "minigame": "swap", "pay": 90, "dialog": ["آخر طلب يا ولدي، وعدتك.", "الفانوس اللي على باب البيت انطفى.", "فيه قطعة محروقة، أشمّ ريحتها من هنا."] }
+        {
+          "item": {
+            "kind": "cooler",
+            "name": "مكيّف جيب"
+          },
+          "minigame": "clean",
+          "pay": 70,
+          "dialog": [
+            "يا هلا ومرحبا يا ولدي.",
+            "المكيّف الصغير حقي صار ينفخ غبار بدال الهوا.",
+            "نظّفه لي، الحر في القطاع السابع ما يرحم."
+          ]
+        },
+        {
+          "item": {
+            "kind": "radio",
+            "name": "مذياع قديم"
+          },
+          "minigame": "wires",
+          "pay": 80,
+          "dialog": [
+            "الراديو ما عاد يجيب إذاعة المحطة.",
+            "أبي أسمع نشرة النيازك قبل لا أطلع."
+          ]
+        },
+        {
+          "item": {
+            "kind": "dallah",
+            "name": "دلّة إلكترونية"
+          },
+          "minigame": "calibrate",
+          "pay": 85,
+          "dialog": [
+            "الدلّة الذكية تحرق القهوة!",
+            "وعندي ضيوف الليلة، فشيلة لو ما زبطت."
+          ]
+        },
+        {
+          "item": {
+            "kind": "lamp",
+            "name": "فانوس شمسي"
+          },
+          "minigame": "swap",
+          "pay": 90,
+          "dialog": [
+            "آخر طلب يا ولدي، وعد.",
+            "الفانوس اللي على باب البيت طفى.",
+            "فيه قطعة محروقة، أشم ريحتها من هنا."
+          ]
+        }
       ]
     },
     {
-      "id": "zirr7", "name": "زِرّ-٧", "minDay": 2, "cooldown": 2,
-      "look": { "species": "robot", "cover": "screen", "outfit": "chassis", "metal": "#9aa5b1", "accent": "#3dff8a" },
-      "memory": { "good": "بيب! سجلّاتي تقول: أنت فنّي ممتاز.", "bad": "سجلّاتي تحتوي... ملاحظات سلبية عنك.", "refused": "تم تسجيل الرفض السابق. سأحاول مجدداً." },
+      "id": "zirr7",
+      "name": "زِرّ-٧",
+      "minDay": 2,
+      "cooldown": 2,
+      "look": {
+        "species": "robot",
+        "cover": "screen",
+        "outfit": "chassis",
+        "metal": "#9aa5b1",
+        "accent": "#3dff8a"
+      },
+      "memory": {
+        "good": "بيب! سجلاتي تقول إنك فنّي ذيب.",
+        "bad": "بيب... سجلاتي فيها ملاحظات مو زينة عنك.",
+        "refused": "بيب. سجّلت إنك رديتني، وبحاول مرة ثانية."
+      },
       "visits": [
-        { "item": { "kind": "radio", "name": "وحدة الصوت" }, "minigame": "wires", "pay": 85, "dialog": ["بيب. تحية.", "وحدة الصوت عندي... تطلع... أصوات... متقطعة.", "الأسلاك... متشابكة... بيب."] },
-        { "item": { "kind": "chip", "name": "شريحة الذاكرة" }, "minigame": "lock", "pay": 95, "dialog": ["بيب. عدت.", "شريحة ذاكرتي انقفلت بعد تحديث فاشل.", "الرمز موجود... في الشريحة نفسها. مفارقة."] },
-        { "item": { "kind": "robotarm", "name": "مفصل الكتف" }, "minigame": "screws", "pay": 100, "dialog": ["بيب بيب.", "مفصل كتفي يصدر صريراً بتردد ٤٤٠ هيرتز.", "هذا مزعج حتى لروبوت."] }
+        {
+          "item": {
+            "kind": "radio",
+            "name": "وحدة الصوت"
+          },
+          "minigame": "wires",
+          "pay": 85,
+          "dialog": [
+            "بيب. هلا.",
+            "وحدة الصوت عندي تطلّع صوت متقطّع.",
+            "الأسلاك متلخبطة... بيب."
+          ]
+        },
+        {
+          "item": {
+            "kind": "chip",
+            "name": "شريحة الذاكرة"
+          },
+          "minigame": "lock",
+          "pay": 95,
+          "dialog": [
+            "بيب، رجعت.",
+            "شريحة ذاكرتي انقفلت بعد تحديث خربان.",
+            "والرقم السري داخل الشريحة نفسها... سالفة."
+          ]
+        },
+        {
+          "item": {
+            "kind": "robotarm",
+            "name": "مفصل الكتف"
+          },
+          "minigame": "screws",
+          "pay": 100,
+          "dialog": [
+            "بيب بيب.",
+            "مفصل كتفي يصفّر صفير يزعج.",
+            "حتى أنا كروبوت انزعجت."
+          ]
+        }
       ]
     },
     {
-      "id": "kzar", "name": "كْزار", "minDay": 3, "cooldown": 3,
-      "look": { "species": "alien", "cover": "helmet", "outfit": "armor", "primary": "#6b4f8a", "helmet": "#3d6fb6", "accent": "#b36bff", "skin": "#8a7cff" },
-      "memory": { "good": "شعبي يغنّي عن مهارتك يا صانع.", "bad": "آخر إصلاح... أغضب أجدادي قليلاً.", "refused": "صددتني سابقاً. الكون واسع، والقلب أوسع." },
+      "id": "kzar",
+      "name": "كْزار",
+      "minDay": 3,
+      "cooldown": 3,
+      "look": {
+        "species": "alien",
+        "cover": "helmet",
+        "outfit": "armor",
+        "primary": "#6b4f8a",
+        "helmet": "#3d6fb6",
+        "accent": "#b36bff",
+        "skin": "#8a7cff"
+      },
+      "memory": {
+        "good": "قومي يسولفون عن شطارتك يا صانع.",
+        "bad": "آخر تصليح... زعّل أجدادي شوي.",
+        "refused": "رديتني قبل، بس الكون واسع والقلب أوسع."
+      },
       "visits": [
-        { "item": { "kind": "crystal", "name": "بلّورة ملاحة" }, "minigame": "calibrate", "pay": 110, "dialog": ["سلام على الجاذبية التي جمعتنا.", "بلّورة الملاحة فقدت ترددها.", "بدونها لن أجد طريق العودة."] },
-        { "item": { "kind": "coil", "name": "ملف الدرع" }, "minigame": "swap", "pay": 120, "dialog": ["عدت يا صانع.", "درع سفينتي فيه قطعة محترقة.", "عاصفة شمسية... لا تسأل."] },
-        { "item": { "kind": "jetpack", "name": "دافع صغير" }, "minigame": "wires", "pay": 130, "dialog": ["الدافع الصغير يشتعل ثم ينطفئ.", "توصيلاته مقلوبة على ما أظن."] }
+        {
+          "item": {
+            "kind": "crystal",
+            "name": "بلّورة ملاحة"
+          },
+          "minigame": "calibrate",
+          "pay": 110,
+          "dialog": [
+            "سلام عليك يا ولد المحطة.",
+            "بلّورة الملاحة ضاع ترددها.",
+            "وبدونها ما ألقى درب الرجعة."
+          ]
+        },
+        {
+          "item": {
+            "kind": "coil",
+            "name": "ملف الدرع"
+          },
+          "minigame": "swap",
+          "pay": 120,
+          "dialog": [
+            "رجعت لك يا صانع.",
+            "درع سفينتي فيه قطعة محروقة.",
+            "عاصفة شمسية... لا تسأل."
+          ]
+        },
+        {
+          "item": {
+            "kind": "jetpack",
+            "name": "دافع صغير"
+          },
+          "minigame": "wires",
+          "pay": 130,
+          "dialog": [
+            "الدافع الصغير يشتغل ويطفي.",
+            "أظن توصيلاته مقلوبة."
+          ]
+        }
       ]
     },
     {
-      "id": "boghi", "name": "بُرغي", "minDay": 4, "cooldown": 2,
-      "look": { "species": "robot", "cover": "screen", "outfit": "chassis", "metal": "#b87333", "accent": "#ffc94a", "accessory": "antenna" },
-      "memory": { "good": "بيب! أنت صديقي المفضّل في المحطة!", "bad": "بيب... ما زال فيّ صرير من آخر مرة.", "refused": "بيب... لماذا رفضتني؟ أنا صغير فقط." },
+      "id": "boghi",
+      "name": "بُرغي",
+      "minDay": 4,
+      "cooldown": 2,
+      "look": {
+        "species": "robot",
+        "cover": "screen",
+        "outfit": "chassis",
+        "metal": "#b87333",
+        "accent": "#ffc94a",
+        "accessory": "antenna"
+      },
+      "memory": {
+        "good": "بيب! أنت أعز صديق لي بالمحطة!",
+        "bad": "بيب... للحين فيني صرير من آخر مرة.",
+        "refused": "بيب... ليش رديتني؟ أنا صغير بس."
+      },
       "visits": [
-        { "item": { "kind": "toolbox", "name": "حقيبة قطع" }, "minigame": "lock", "pay": 80, "dialog": ["بيب! مرحبا!", "أنا بُرغي، روبوت صيانة صغير.", "قفلت حقيبة قطعي وأنا بداخلها... أقصد بخارجها."] },
-        { "item": { "kind": "cooler", "name": "مروحة تبريد" }, "minigame": "clean", "pay": 90, "dialog": ["بيب! أنا هنا مجدداً.", "مروحة التبريد عندي مليانة غبار.", "حرارتي ٩٩ درجة. هذا كثير؟"] },
-        { "item": { "kind": "generator", "name": "بطارية احتياطية" }, "minigame": "screws", "pay": 100, "dialog": ["بيب. بطاريتي الاحتياطية منفوخة.", "غطاها مربوط ببراغي كثيرة جداً."] }
+        {
+          "item": {
+            "kind": "toolbox",
+            "name": "حقيبة قطع"
+          },
+          "minigame": "lock",
+          "pay": 80,
+          "dialog": [
+            "بيب! هلا!",
+            "أنا برغي، روبوت صيانة صغير.",
+            "قفلت شنطة قطعي، والمفتاح داخلها!"
+          ]
+        },
+        {
+          "item": {
+            "kind": "cooler",
+            "name": "مروحة تبريد"
+          },
+          "minigame": "clean",
+          "pay": 90,
+          "dialog": [
+            "بيب، رجعت.",
+            "مروحة التبريد عندي مليانة غبار.",
+            "حرارتي تسعة وتسعين... كثير؟"
+          ]
+        },
+        {
+          "item": {
+            "kind": "generator",
+            "name": "بطارية احتياطية"
+          },
+          "minigame": "screws",
+          "pay": 100,
+          "dialog": [
+            "بيب. بطاريتي الاحتياطية منفوخة.",
+            "وغطاها مربوط ببراغي واجد."
+          ]
+        }
       ]
     }
   ],
-
   "generic": {
     "names": {
-      "human": ["سعود", "ماجد", "فيصل", "تركي", "بدر", "نايف", "مشعل", "عبدالله", "سلطان", "هزّاع", "جاسم", "منصور", "صالح", "عبدالرحمن", "مساعد"],
-      "robot": ["ر-٤٢", "تِك-٩", "مِسمار", "وَمضة-٣", "دُرع-١١", "صَدى-٥"],
-      "alien": ["كْرِيل", "زوغ", "أوبرون", "ثرّال", "ميك", "فلّوكس"]
+      "human": [
+        "سعود",
+        "ماجد",
+        "فيصل",
+        "تركي",
+        "بدر",
+        "نايف",
+        "مشعل",
+        "عبدالله",
+        "سلطان",
+        "هزّاع",
+        "جاسم",
+        "منصور",
+        "صالح",
+        "عبدالرحمن",
+        "مساعد"
+      ],
+      "robot": [
+        "ر-٤٢",
+        "تِك-٩",
+        "مِسمار",
+        "وَمضة-٣",
+        "دُرع-١١",
+        "صَدى-٥"
+      ],
+      "alien": [
+        "كْرِيل",
+        "زوغ",
+        "أوبرون",
+        "ثرّال",
+        "ميك",
+        "فلّوكس"
+      ]
     },
     "greet": {
-      "human": ["السلام عليكم.", "مرحبا يا معلّم.", "هلا والله.", "مساء الخير.", "يا صاحب الورشة!", "الله يعطيك العافية."],
-      "robot": ["بيب... تحية.", "بيب. طلب صيانة.", "تحية يا بشري. بيب."],
-      "alien": ["سلام يا ساكن المحطة.", "تحية من وراء الحزام.", "...أهذه ورشة الإصلاح؟"]
+      "human": [
+        "السلام عليكم.",
+        "هلا يا معلّم.",
+        "هلا والله.",
+        "مسّاك الله بالخير.",
+        "يا صاحب الورشة!",
+        "الله يعطيك العافية."
+      ],
+      "robot": [
+        "بيب... هلا.",
+        "بيب. أبي صيانة.",
+        "هلا يا إنسان. بيب."
+      ],
+      "alien": [
+        "هلا يا ولد المحطة.",
+        "سلام من ورا الحزام.",
+        "هذي ورشة التصليح؟"
+      ]
     },
-    "ask": ["تقدر تصلّحه؟", "أبيه اليوم إذا تقدر.", "سمعت إنك أشطر فنّي في السوق.", "كم تاخذ عليه؟", "لا تطوّل علي الله يخليك."],
+    "ask": [
+      "تقدر تصلّحه؟",
+      "أبيه اليوم لو تقدر.",
+      "يقولون إنك أشطر فنّي بالسوق.",
+      "كم تبي عليه؟",
+      "لا تطوّل علي الله يخليك."
+    ],
     "problems": [
-      { "item": "ثلاجة محمولة", "kind": "cooler", "minigame": "clean", "problem": "ثلاجتي المحمولة امتلأت صدأ من رطوبة القبة.", "pay": [60, 95] },
-      { "item": "مذياع موجات", "kind": "radio", "minigame": "wires", "problem": "المذياع يطلع وشوشة بس، أظن الأسلاك تلخبطت.", "pay": [65, 100] },
-      { "item": "مثقاب صخري", "kind": "drill", "minigame": "screws", "problem": "المثقاب يهتز ويطلع صوت غريب من داخل الغطاء.", "pay": [60, 95] },
-      { "item": "جهاز اتصال", "kind": "phone", "minigame": "lock", "problem": "قفلت جهازي بالغلط ونسيت الرمز.", "pay": [70, 110] },
-      { "item": "بوصلة نجمية", "kind": "nav", "minigame": "calibrate", "problem": "البوصلة تأشّر على كل مكان إلا الصح.", "pay": [70, 110] },
-      { "item": "طائرة صغيرة", "kind": "drone", "minigame": "calibrate", "problem": "الطائرة تدور حول نفسها وما تطير مستقيم.", "pay": [70, 105] },
-      { "item": "فانوس شمسي", "kind": "lamp", "minigame": "swap", "problem": "الفانوس يرمش ثم ينطفي، فيه قطعة محروقة.", "pay": [55, 90] },
-      { "item": "دلّة كهربائية", "kind": "dallah", "minigame": "swap", "problem": "الدلّة ما تسخّن، وريحتها شياط.", "pay": [60, 95] },
-      { "item": "مولّد صغير", "kind": "generator", "minigame": "screws", "problem": "المولّد ما يشتغل، وغطاه مربوط ببراغي كثيرة.", "pay": [75, 120] },
-      { "item": "ذراع آلية", "kind": "robotarm", "minigame": "clean", "problem": "الذراع الآلية تعلّقت مفاصلها بالزيت والأوساخ.", "pay": [65, 100] },
-      { "item": "ملف طاقة", "kind": "coil", "minigame": "wires", "problem": "ملف الطاقة يطلع شرار، أظن التوصيلات معكوسة.", "pay": [75, 115] },
-      { "item": "خزنة صغيرة", "kind": "safe", "minigame": "lock", "problem": "خزنتي الصغيرة ما تنفتح، والرمز ضاع.", "pay": [80, 120] },
-      { "item": "وحدة ذاكرة", "kind": "chip", "minigame": "swap", "problem": "وحدة الذاكرة ما عادت تقرأ شي.", "pay": [70, 105] },
-      { "item": "حقيبة نفّاثة", "kind": "jetpack", "minigame": "wires", "problem": "الحقيبة النفّاثة تشتغل نص ثانية وتطفي.", "pay": [85, 125] },
-      { "item": "قناع تنفّس", "kind": "mask", "minigame": "clean", "problem": "فلتر قناعي انسدّ بغبار المناجم.", "pay": [60, 90] }
+      {
+        "item": "ثلاجة محمولة",
+        "kind": "cooler",
+        "minigame": "clean",
+        "problem": "ثلاجتي الصغيرة صدّت من رطوبة القبة.",
+        "pay": [
+          60,
+          95
+        ]
+      },
+      {
+        "item": "مذياع موجات",
+        "kind": "radio",
+        "minigame": "wires",
+        "problem": "الراديو يطلّع وشوشة بس، أظن الأسلاك متلخبطة.",
+        "pay": [
+          65,
+          100
+        ]
+      },
+      {
+        "item": "مثقاب صخري",
+        "kind": "drill",
+        "minigame": "screws",
+        "problem": "المثقاب يرجف ويطلّع صوت غريب من داخل الغطا.",
+        "pay": [
+          60,
+          95
+        ]
+      },
+      {
+        "item": "جهاز اتصال",
+        "kind": "phone",
+        "minigame": "lock",
+        "problem": "قفلت جهازي بالغلط ونسيت الرقم.",
+        "pay": [
+          70,
+          110
+        ]
+      },
+      {
+        "item": "بوصلة نجمية",
+        "kind": "nav",
+        "minigame": "calibrate",
+        "problem": "البوصلة تأشّر على كل مكان إلا الصح.",
+        "pay": [
+          70,
+          110
+        ]
+      },
+      {
+        "item": "طائرة صغيرة",
+        "kind": "drone",
+        "minigame": "calibrate",
+        "problem": "الطيارة الصغيرة تلف على نفسها وما تمشي سيدا.",
+        "pay": [
+          70,
+          105
+        ]
+      },
+      {
+        "item": "فانوس شمسي",
+        "kind": "lamp",
+        "minigame": "swap",
+        "problem": "الفانوس يرمش ويطفي، فيه قطعة محروقة.",
+        "pay": [
+          55,
+          90
+        ]
+      },
+      {
+        "item": "دلّة كهربائية",
+        "kind": "dallah",
+        "minigame": "swap",
+        "problem": "الدلّة ما تسخّن، وريحتها شياط.",
+        "pay": [
+          60,
+          95
+        ]
+      },
+      {
+        "item": "مولّد صغير",
+        "kind": "generator",
+        "minigame": "screws",
+        "problem": "المولّد ما يشتغل، وغطاه مربوط ببراغي واجد.",
+        "pay": [
+          75,
+          120
+        ]
+      },
+      {
+        "item": "ذراع آلية",
+        "kind": "robotarm",
+        "minigame": "clean",
+        "problem": "الذراع الآلية علقت مفاصلها من الزيت والوسخ.",
+        "pay": [
+          65,
+          100
+        ]
+      },
+      {
+        "item": "ملف طاقة",
+        "kind": "coil",
+        "minigame": "wires",
+        "problem": "ملف الطاقة يطلّع شرار، أظن التوصيلات مقلوبة.",
+        "pay": [
+          75,
+          115
+        ]
+      },
+      {
+        "item": "خزنة صغيرة",
+        "kind": "safe",
+        "minigame": "lock",
+        "problem": "خزنتي الصغيرة ما تنفتح، والرقم راح.",
+        "pay": [
+          80,
+          120
+        ]
+      },
+      {
+        "item": "وحدة ذاكرة",
+        "kind": "chip",
+        "minigame": "swap",
+        "problem": "وحدة الذاكرة ما عادت تقرا شي.",
+        "pay": [
+          70,
+          105
+        ]
+      },
+      {
+        "item": "حقيبة نفّاثة",
+        "kind": "jetpack",
+        "minigame": "wires",
+        "problem": "الشنطة النفّاثة تشتغل نص ثانية وتطفي.",
+        "pay": [
+          85,
+          125
+        ]
+      },
+      {
+        "item": "قناع تنفّس",
+        "kind": "mask",
+        "minigame": "clean",
+        "problem": "فلتر قناعي انسد من غبار المناجم.",
+        "pay": [
+          60,
+          90
+        ]
+      }
     ]
   },
-
   "reactions": {
-    "great": ["ما شاء الله! شغل نظيف.", "والله إنك فنّان!", "ممتاز... أكيد بأرجع لك.", "أسرع فنّي شفته في حياتي!"],
-    "ok": ["زين، يمشي الحال.", "شكراً، الله يعطيك العافية.", "تمام، هذا المطلوب."],
-    "bad": ["يعني... اشتغل، بس.", "تأخرت علي شوي.", "مو أفضل شغل، بس ماشي."],
-    "fail": ["خربته زيادة!", "هذا اللي تسمّيه تصليح؟!", "رجّع لي غرضي، ما راح أدفع!"],
-    "refused": ["خلاص، بروح لغيرك.", "ما توقعتها منك.", "طيب... مع السلامة."],
-    "negYes": ["طيب... اتفقنا.", "ماشي، عشان خاطرك.", "أنت تاجر شاطر!"],
-    "negNo": ["هذا آخر سعر!", "لا لا، كثير.", "السعر ما يتغيّر."],
-    "negLeave": ["تبي تسرقني؟ مع السلامة!", "ورشات السوق كثيرة!"],
-    "repairFail": ["ما قدرت تسوّيها؟ الاتفاق انتهى.", "ضيّعت وقتي."],
-    "playerNegotiate": ["السعر قليل شوي... وش رايك نزيده؟", "الشغل صعب، يستاهل أكثر."]
+    "great": [
+      "ما شاء الله! شغل نظيف.",
+      "والله إنك فنّان!",
+      "كفو... أكيد برجع لك.",
+      "أسرع فنّي شفته بحياتي!"
+    ],
+    "ok": [
+      "زين، يمشي الحال.",
+      "مشكور، الله يعطيك العافية.",
+      "تمام، هذا المطلوب."
+    ],
+    "bad": [
+      "يعني... اشتغل، بس.",
+      "تأخرت علي شوي.",
+      "مو أحسن شغل، بس ماشي."
+    ],
+    "fail": [
+      "خربته زيادة!",
+      "هذا اللي تسمّيه تصليح؟!",
+      "رجّع لي غرضي، ما راح أدفع!"
+    ],
+    "refused": [
+      "خلاص، بروح لغيرك.",
+      "ما توقعتها منك.",
+      "طيب... مع السلامة."
+    ],
+    "negYes": [
+      "طيب... اتفقنا.",
+      "ماشي، عشان خاطرك.",
+      "أنت تاجر شاطر!"
+    ],
+    "negNo": [
+      "هذا آخر سعر!",
+      "لا لا، كثير.",
+      "السعر ما يتغير."
+    ],
+    "negLeave": [
+      "تبي تنصب علي؟ مع السلامة!",
+      "الورش بالسوق واجد!"
+    ],
+    "repairFail": [
+      "ما قدرت عليها؟ خلاص انتهى الاتفاق.",
+      "ضيّعت وقتي."
+    ],
+    "playerNegotiate": [
+      "السعر قليل شوي... وش رايك نزيده؟",
+      "الشغل صعب، يستاهل أكثر."
+    ]
   }
 }

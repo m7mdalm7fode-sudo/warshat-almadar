@@ -37,16 +37,25 @@ class VoiceEngine {
     this.stop();
     const mode = this.mode;
     if (mode === 'off' || !text) return 0;
-    const clean = String(text).replace(/[()«»"!؟?…\.]+/g, ' ').trim();
+    const clean = String(text)
+      .replace(/\([^)]*\)/g, ' ')          // لا تقرأ الوصف اللي بين القوسين
+      .replace(/[◈★♪✓✗«»"]/g, ' ')
+      .replace(/\.{2,}|…/g, '، ')           // النقاط = وقفة قصيرة
+      .replace(/[!؟?]+/g, (m) => (m.includes('؟') || m.includes('?') ? '؟' : '!'))
+      .replace(/\s+/g, ' ')
+      .replace(/^[،\s]+|[،\s]+$/g, '')
+      .trim();
     if (!clean) return 0;
     if (mode !== 'babble' && this.voice) {
       try {
         const u = new SpeechSynthesisUtterance(clean);
         u.voice = this.voice;
         u.lang = this.voice.lang;
-        const base = profile.pitch ?? 0.9;
-        u.pitch = profile.species === 'robot' ? 1.45 : profile.species === 'alien' ? Math.max(0.1, base * 0.55) : base;
-        u.rate = profile.species === 'robot' ? 1.0 : 1.08;
+        // نبرة طبيعية قريبة من الصوت الأصلي حتى ما يطلع الكلام مشوّه
+        const p = profile.pitch ?? 0.9;
+        const human = 0.9 + Math.max(0, Math.min(1, (p - 0.72) / 0.34)) * 0.16;
+        u.pitch = profile.species === 'robot' ? 1.25 : profile.species === 'alien' ? 0.8 : human;
+        u.rate = 1.0;
         u.volume = 0.9;
         window.speechSynthesis.speak(u);
         return clean.length * 70;
